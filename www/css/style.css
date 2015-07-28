@@ -1,0 +1,136 @@
+/* Empty. Add your own CSS if you like */
+.Aligner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.Aligner-item {
+  max-width: 80% !important;
+}
+
+.Aligner-item--top {
+  align-self: flex-start !important;
+}
+
+.Aligner-item--bottom {
+  align-self: flex-end !important;
+}
+  .user-option-modal-location {  
+     width: 70%; 
+     height: 30% ; 
+     top: 30%; 
+     left: 15%; 
+     
+     min-height: 0px !important;
+     
+  }
+    .dialpad-modal {  
+     width: 100%; 
+     height: 50% ; 
+     top: 40%; 
+
+     
+     min-height: 0px !important;
+     
+  }
+
+
+.callingBG{
+  background-color: #555555 !important;
+  background-size: cover !important;
+  
+}
+.avatarPos {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 45%; right: 0;
+  height: 15%;
+  width: 25%;
+  text-align: center;
+  z-index: 100;
+}
+.spinnerPos {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 15%; right: 0;
+  height: 100%;
+  text-align: center;
+}
+
+.spinner svg {
+  width: 70% !important;
+  height: 70% !important;
+}
+.text {
+  //background-color: #428EFF;
+  color: #FFFFFF;
+  font-weight: bolder;
+  //max-font-size: 30px;
+  //font-size: 20px;
+  font-variant: normal;
+  text-align: center;
+  text-shadow: 3px 3px 3px #120000;
+}
+.shadower{
+  text-shadow: 3px 3px 3px #120000;
+}
+.mybottom{
+  margin-top:90% !important;
+}
+.full-screen{
+  width:100% !important;
+  height: 100% !important;
+}
+.backgrounder{
+  
+  
+  background-color: #428EFF;
+  background-position: 50%;
+  border-radius: 50%;
+  
+  text-align: center;
+}
+.white{
+ color: #EEEEEE !important;
+ font-variant: normal;
+}
+.shadowest{
+  text-shadow: 7px 7px 7px #120000;
+}
+.dialInput{
+  //background-color: #428EFF !important;
+  color: #DDDDDD !important;
+  font-weight: bolder;
+  max-font-size: 30px !important;
+  font-size: 25px !important;
+  font-variant: normal;
+  text-align: center;
+  text-shadow: 3px 3px 3px #120000;
+}
+.dialInputModal{
+  color: #111111 !important;
+  font-weight: bolder;
+  max-font-size: 30px !important;
+  font-size: 20px !important;
+  font-variant: normal;
+  text-align: center;
+  
+}
+.myUnique1 {
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+          background: url(../img/notesbackground.jpg) center;
+           background-size: cover;
+        }
+ .app-logo
+ {
+ 	background-image: url(../img/Teicon.png);
+ 	background-repeat: no-repeat;
+                                background-position: 50%;
+                                border-radius: 50%;
+                                width: 145px;
+                                height: 145px;
+ }       
+

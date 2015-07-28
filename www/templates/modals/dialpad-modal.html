@@ -1,0 +1,41 @@
+<ion-modal-view class="dialpad-modal has-footer">
+
+
+<div class="list">
+    <span class="item item-input text" style="margin-top:20%">
+      <span class="input-label right"><i class="ion-android-call"></i></span>
+      
+    <input type="text" class="dialInputModal" ng-model="dialpadInput">
+      <a class="button button-clear icon-right ion-backspace" ng-click="removed();"> </a>
+      
+  </span>
+
+
+
+
+
+       <div class=" button-bar">
+       <a class="button button-dark" ng-click="pressed('1')">1</a>
+       <a class="button button-dark" ng-click="pressed('2')">2</a>
+       <a class="button button-dark" ng-click="pressed('3')">3</a>
+     </div>
+       <div class=" button-bar">
+       <a class="button button-dark" ng-click="pressed('4')">4</a>
+       <a class="button button-dark" ng-click="pressed('5')">5</a>
+       <a class="button button-dark" ng-click="pressed('6')">6</a>
+     </div>
+        <div class=" button-bar">
+       <a class="button button-dark" ng-click="pressed('7')">7</a>
+       <a class="button button-dark" ng-click="pressed('8')">8</a>
+       <a class="button button-dark" ng-click="pressed('9')">9</a>
+     </div>
+         <div class=" button-bar">
+       <a class="button button-light-900" ng-click="pressed('*')">*</a>
+       <a class="button button-dark" ng-click="pressed('0')">0</a>
+       <a class="button button-light-900" ng-click="pressed('#')">#</a>
+     </div>
+  </div>
+
+
+
+</ion-modal-view>

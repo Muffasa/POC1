@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">-->
+
+
+
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="lib/ionic-material/dist/ionic.material.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet"> 
+    <link href="css/user-options.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic-material/dist/ionic.material.min.js"></script>
+           <!-- Angular Timer-->
+            <script src="lib/angular-timer/dist/angular-timer.min.js"></script>
+            <script src="lib/momentjs/min/moment.min.js"></script>
+            <script src="lib/momentjs/min/locales.min.js"></script>
+            <script src="lib/humanize-duration/humanize-duration.js"></script>
+
+    <!--Firebase-->
+    <script src="lib/firebase/firebase.js"></script>
+    <script src="lib/angularfire/dist/angularfire.js"></script>
+    <!-- Socket io-->
+    <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="lib/angular-socket-io/socket.js"></script>
+    <script src="lib/socket.io-client/socket.io.js"></script>
+    <!--ngCordova-->
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+     <!-- ionic core service-->
+     <script src="lib/ionic-service-core/ionic-core.js"></script>
+       <!-- ionic push service-->
+       <script src="lib/ionic-service-push/ionic-push.js"></script>
+
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!--twilio client plugin-->
+    <script src="tcPlugin.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script> 
+    <script src="js/modules/controllers-module.js"></script>
+    <script src="js/modules/services-module.js"></script>
+    <script src="js/config/app-config.js"></script>
+    <script src="js/config/root-directives-config.js"></script>
+    <script src="js/run/app.run.js"></script>
+    <script src="js/run/app.events.js"></script>
+    <script src="js/controllers/live-connection-controller.js"></script>
+    <script src="js/controllers/initialize-controllers.js"></script>
+    <script src="js/controllers/view-controllers.js"></script>
+    <script src="js/controllers/directives-controllers.js"></script>
+    <script src="js/services/converters.js"></script>
+    <script src="js/services/cordova-services.js"></script>
+    <script src="js/services/dal-service.js"></script>
+    <script src="js/services/data-services.js"></script>
+    <script src="js/services/register-services.js"></script>
+    <script src="js/services/socket-service.js"></script>
+    <script src="js/services/twilio-service.js"></script>
+    <script src="js/directives/ion-md-input-directive.js"></script>
+    <script src="js/directives/incoming-call-directive.js"></script>
+    <script src="js/directives/image-load-watcher-directive.js"></script>
+    <script src="js/directives/user-options-directive.js"></script>
+    
+    
+  </head>
+  <body ng-app="MTPOC">
+
+    <ion-nav-view></ion-nav-view>
+  </body>
+</html>

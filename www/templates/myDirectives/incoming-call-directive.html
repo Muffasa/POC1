@@ -1,0 +1,68 @@
+
+<div class="Aligner">
+
+
+
+       <!--<div class="Aligner-item Aligner-item--top">…</div>
+        <div class="Aligner-item">…</div>
+        <div class="Aligner-item Aligner-item--bottom">…</div>-->
+
+
+      <div class="list card Aligner-item qqqqq" style="top: 30%">
+        <style>
+         .qqqqq {
+          margin-top:5%;
+          margin-bottom:10%;
+         }
+        </style>
+
+        <div class="item item-avatar">
+          <img ng-if="peerUser.profileImageURL" src="{{peerUser.profileImageURL}}" >
+          <img ng-if="!peerUser.profileImageURL" src="(img/no-image.png)" >
+          <h2>Incoming Call From:</h2>
+          <h3> {{peerUser.displayName}}</h3>
+          <p>{{peerUser.phone_number}}</p>
+         
+        </div>
+
+        <div class="item item-body">
+
+          <img class="full-image" src="{{currentCampaign.image.src}}">
+          <h3>{{currentCampaign.name}}</h3>
+          <timer id="timer" countdown="14" interval="1000" autostart="false">
+            <div class="progress progress-striped active {{displayProgressActive}}"> 
+              <p>Don't keep your friend wating for money!<p>
+              <p> but please do if thats your boss=] <p>
+
+                {{progressBar}}% 
+              <!--<div class="bar" style="min-width: 2em;width: {{progressBar}}%;"></div> -->
+            <progress max="100" value="{{progressBar}}"></progress>
+            </div>
+          </timer>
+            
+          
+          
+        </div>
+        
+
+
+        <div class="item tabs tabs-secondary ">
+          <a class="tab-item balanced" ng-click="answer()" >
+            <i class="icon ion-android-call"></i>
+            
+          </a>
+          <a class="tab-item calm" ng-click="messege()">
+            <i class="icon ion-chatbox"></i>
+            
+          </a>
+          <a class="tab-item assertive" ng-click="reject()">
+            <i class="icon ion-android-cancel"></i>
+            
+          </a>
+        </div>
+
+      </div>
+
+
+</div>
+

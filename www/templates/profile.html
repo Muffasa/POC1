@@ -1,0 +1,137 @@
+<ion-view view-title="Profile">
+
+
+<ion-content has-header="true" ng-class="{expanded:$scope.isExpanded}" >
+    <div ng-hide="!isFull">
+
+        <div class="hero" style="background-image: url('img/splash.png');">
+
+            <div class="content">
+
+                <div class="avatar" ng-style="{'background-image': 'url(' + profilePicture + ')'}"></div>
+                <h3><a class="light">{{displayName}}</a></h3>
+                <h4>{{nickName}}</h4>
+
+            </div>
+
+        </div>
+
+        <div class="tabs tabs-dark tabs-icon-top static">
+            <a  ui-sref="app.info" class="tab-item">
+                <i class="icon ion-edit"></i> Edit Info
+            </a>
+            <a  ui-sref="app.allUsers" class="tab-item">
+                <i class="icon ion-android-people"></i> Friends
+            </a>
+            <a ui-sref="app.wallet" class="tab-item">
+                <i class="icon ion-cash"></i> Wallet
+            </a>
+        </div>
+
+
+        <h4 class="content padding double-padding-x">Info</h4>
+
+        <p class="content">Keep your info updated! in Money Tunes we hate spams, we want you to listen only to the things that really interests you.</p>
+
+               <!-- <div class="list animate-fade-slide-in-right">
+            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
+                <img src="img/jon-snow.jpg">
+                <h2>Jon Snow</h2>
+                <p>Da illest illegitimate</p>
+                <i class="icon ion-chatbubble muted"></i>
+            </a>
+            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
+                <img src="img/sansa.jpg">
+                <h2>Sansa Stark</h2>
+                <p>&amp; Joffrey <strike>sitting</strike> sat in a tree</p>
+                <i class="icon ion-chatbubble muted"></i>
+            </a>
+            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
+                <img src="img/tyrion.jpg">
+                <h2>Tyrion Lannister</h2>
+                <p>B.A.M.F. imp</p>
+                <i class="icon ion-chatbubble muted"></i>
+            </a>
+        </div>-->
+
+
+
+    </div>
+
+    <div ng-hide="isFull" class="my01">
+                
+                        <div class="row row-center">
+                          <div class="col col-center">
+                    <h4 class="content padding double-padding-x">Compelete your registration</h4>
+
+                    <p>In order to view this page you must compelete your registration</p>
+
+                    <button class="button button-block button-calm" ng-click="goToSingin()">
+                      Sing in
+                    </button>
+                   
+                          </div>
+                        </div>
+
+
+
+                    
+    </div> 
+</ion-content>
+
+       
+    
+</ion-view>
+
+
+
+
+
+
+
+
+
+
+<!--<ion-view view-title="Profile">
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+        <div class="hero slide-up" style="background-image: url('img/profile-bg.jpg');">
+            <div class="content">
+                <div class="avatar" style="background-image: url('img/daenerys.jpg');"></div>
+                <h3><a class="light">Daenerys Targaryen</a></h3>
+                <h4>dragon_mommy</h4>
+            </div>
+        </div>
+        <div class="tabs tabs-dark tabs-icon-top static">
+            <a ui-sref="app.activity" class="tab-item">
+                <i class="icon ion-arrow-graph-up-right"></i> Activity
+            </a>
+            <a ui-sref="app.friends" class="tab-item">
+                <i class="icon ion-android-people"></i> Friends
+            </a>
+            <a ui-sref="app.gallery" class="tab-item">
+                <i class="icon ion-images"></i> Photos
+            </a>
+        </div>
+        <h4 class="content padding double-padding-x">Following</h4>
+        <div class="list animate-fade-slide-in-right">
+            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
+                <img src="img/jon-snow.jpg">
+                <h2>Jon Snow</h2>
+                <p>Da illest illegitimate</p>
+                <i class="icon ion-chatbubble muted"></i>
+            </a>
+            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
+                <img src="img/sansa.jpg">
+                <h2>Sansa Stark</h2>
+                <p>&amp; Joffrey <strike>sitting</strike> sat in a tree</p>
+                <i class="icon ion-chatbubble muted"></i>
+            </a>
+            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
+                <img src="img/tyrion.jpg">
+                <h2>Tyrion Lannister</h2>
+                <p>B.A.M.F. imp</p>
+                <i class="icon ion-chatbubble muted"></i>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>-->

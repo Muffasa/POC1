@@ -1,0 +1,56 @@
+  
+  <ion-modal-view>
+  <ion-content scroll="false" style="background-color: #555555 !important;
+  background-size: cover !important;">
+
+
+<h2 ng-if="peerUser.displayName" class="text">Calling {{peerUser.displayName}}</h2>
+<h2 ng-if="!peerUser.displayName" class="text">Calling {{peerUser.phone_number}}</h2>
+
+      <div class="avatar avatarPos" ng-style="{'background-image': 'url(' + peerUser.profileImageURL + ')'}" ng-if="peerUser.profileImageURL"></div>
+
+<div class="avatar avatarPos" ng-style="{'background-image': 'url(img/no-image.png)'}" ng-if="!peerUser.profileImageURL"></div>
+
+
+
+
+        
+
+          
+
+          
+            <ion-spinner icon="ripple" class=" spinnerPos spinner-balanced"></ion-spinner>
+          
+
+
+         <div class="tabs tabs-secondary text " style="margin-top:80% !important;background-color: #555555 !important; border-style: none !importand">
+         <a class="tab-item " ng-click="speaker()">
+                <i class="icon ion-android-microphone" ng-class="{'icon ion-android-microphone-off':micOn,'icon ion-android-microphone':!micOn}"></i>
+          </a>
+          <a class="tab-item calm" ng-click="showDialpad()">
+            <i class="icon ion-ios-keypad-outline" ng-class="{'icon ion-ios-keypad-outline':!dialpadShow,'icon ion-ios-keypad':dialpadShow}" ></i>   
+          </a>
+          <a class="tab-item assertive" ng-click="abortCall()">
+            <i class="icon ion-android-cancel"></i>
+            
+          </a>
+        </div>
+
+      </div>
+  
+  <!--<a ng-click="abortCall()" class="button button-full button-assertive" style="margin-top:80% !important;   display: block;
+  margin-right: 0;
+  margin-left: 0;
+  border-right-width: 0;
+  border-left-width: 0;
+  border-radius: 0;">Cancel</a>
+    <a ng-click="speaker()" class="button button-full button-assertive" style="margin-top:80% !important;   display: block;
+  margin-right: 0;
+  margin-left: 0;
+  border-right-width: 0;
+  border-left-width: 0;
+  border-radius: 0;">Speaker</a>-->
+
+
+  </ion-content>
+    </ion-modal-view>

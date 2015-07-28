@@ -1,0 +1,22 @@
+
+<div class="list card" style="margin-top: 12%">
+
+  <div class="item item-avatar">
+    <img ng-if="selectedUser.profileImageURL" src="{{selectedUser.profileImageURL}}" >
+    <img ng-if="!selectedUser.profileImageURL" src="img/no-image.png" >
+    <h2>{{selectedUser.displayName}}</h2>
+    <p>{{selectedUser.phone_number}}</p>
+  </div>
+
+  <div class="item tabs tabs-secondary tabs-icon-left">
+    <a ng-click="call()" class="tab-item" href="#">
+      <i class="icon ion-ios-telephone balanced"></i>
+      Call
+    </a>
+    <a ng-click="messege()" class="tab-item" href="#">
+      <i class="icon ion-chatbubbles royal"></i>
+      Messege
+    </a>
+  </div>
+
+</div>

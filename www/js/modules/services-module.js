@@ -1,0 +1,1 @@
+angular.module("MTPOC.services",["register.services","dal.service","data.services","cordova.services",'converters'])

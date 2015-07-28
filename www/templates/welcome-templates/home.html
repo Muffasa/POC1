@@ -1,0 +1,48 @@
+<ion-view view-title="Welcome">
+
+    <ion-content class="myUnique1">
+ 
+        <div class="login list ">
+            <div class="hero no-header flat">
+
+                <div class="content">
+                                    <i class="hero-icon " style = 'background-image: url(img/Teicon.png);background-repeat: no-repeat;
+                                background-position: 50%;
+                                border-radius: 50%;
+                                width: 145px;
+                                height: 145px;'></i>
+                    
+                    <h3 class="text">Welcome To Money Tunes!</h3>
+                </div>
+            </div> 
+
+                   
+            
+            <div class="list-item padding">
+                  
+                    <h4 class="text">Select your country</h4>
+                      <label class="item item-stable item-select">
+                        <select class="center" ng-model="selectedCountry" ng-options=" country.name for country in countries" >
+                        </select>
+                      </label>       
+            </div>
+
+              
+                <ion-md-input ng-model="usernumber" placeholder="Enter your phone number" highlight-color="balanced" type="tel" style="vertical-allign: center"></ion-md-input> 
+              
+            
+            <div class="list-item padding">
+               <button ng-click="ConfirmNumber(usernumber)" class="button button-block button-balanced waves-effect waves-button waves-light">Start</button>
+            </div>
+
+            <div class="list-item"> 
+                <h4 class="list-item text">Allredy a member? Login!</h4>
+            </div>
+
+            <div class="list-item padding">
+                <button ng-click="goToLoginState()" class="button button-block button-assertive waves-effect waves-button waves-light">Login</button>
+            </div>
+    
+      </div>  
+    </ion-content>
+</ion-view>
