@@ -1,4 +1,4 @@
-<ion-view view-title="Profile">
+<ion-view view-title="Profile" ng-class="{myUnique4:isFull}">
 
 
 <ion-content has-header="true" ng-class="{expanded:$scope.isExpanded}" >
@@ -29,9 +29,9 @@
         </div>
 
 
-        <h4 class="content padding double-padding-x">Info</h4>
+        <h4 class="content padding double-padding-x text">Info</h4>
 
-        <p class="content">Keep your info updated! in Money Tunes we hate spams, we want you to listen only to the things that really interests you.</p>
+        <p class="content text">Keep your info updated! in Money Tunes we hate spams, we want you to listen only to the things that really interests you.</p>
 
                <!-- <div class="list animate-fade-slide-in-right">
             <a ui-sref="app.friends" class="item item-avatar item-icon-right">
@@ -67,7 +67,7 @@
                     <p>In order to view this page you must compelete your registration</p>
 
                     <button class="button button-block button-calm" ng-click="goToSingin()">
-                      Sing in
+                      Sing up
                     </button>
                    
                           </div>

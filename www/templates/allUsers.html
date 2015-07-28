@@ -1,12 +1,12 @@
-<ion-view view-title="All Users">
-    <ion-content class="myUnique1" ng-class="{expanded:isExpanded}">
+<ion-view view-title="All Users" class="myUnique1">
+    <ion-content  ng-class="{expanded:isExpanded}">
         <div class="content has-header">
             <div class="list animate-fade-slide-in-right">
                 
                     
                     <a ng-click="showOptions(user)"   ng-repeat="user in allAppUsers" on-finish-render="ngRepeatFinished" class="item item-avatar item-icon-right shadower">
                     
-                    <img ng-if="user.profileImageURL" src="{{user.profileImageURL}}" n>
+                    <img ng-if="user.profileImageURL" src="{{user.profileImageURL}}">
                     <img src="img/no-image.png" ng-if="!user.profileImageURL">
                     <div class="backgrounder shadower" style="margin-right:20%">
                     <h2 class="white">{{user.displayName}}</h2>

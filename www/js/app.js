@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('MTPOC', ['ionic','ionic-material','ngCordova','ionic.service.push','ionic.service.core','firebase','btford.socket-io','MTPOC.controllers','MTPOC.services','timer'])
+angular.module('MTPOC', ['ionic','ionic-material','ngCordova','ngAudio','ionic.service.push','ionic.service.core','firebase','btford.socket-io','MTPOC.controllers','MTPOC.services','timer'])
 .filter('testfilter',function(){
     return function(text){
         if(parseInt(text)<10)
@@ -42,7 +42,7 @@ angular.module('MTPOC', ['ionic','ionic-material','ngCordova','ionic.service.pus
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
     // Turn off caching for demo simplicity's sake
-    //$ionicConfigProvider.views.maxCache(0);
+    $ionicConfigProvider.views.maxCache(10);
 
     /*
     // Turn off back button text
@@ -139,10 +139,27 @@ angular.module('MTPOC', ['ionic','ionic-material','ngCordova','ionic.service.pus
                 controller: 'AllUsersCtrl'
             },
             'fabContent': {
-                template: '<button id="fab-friends" class="button button-fab button-fab-top-left expanded button-balanced-900 spin"><i class="icon ion-ios-personadd"></i></button>',
+                template: '<button id="fab-allUsers" class="button button-fab button-fab-top-left expanded button-balanced-900 spin"><i class="icon ion-ios-personadd"></i></button>',
                 controller: function ($timeout) {
                     $timeout(function () {
-                        document.getElementById('fab-friends').classList.toggle('on');
+                        document.getElementById('fab-allUsers').classList.toggle('on');
+                    }, 900);
+                }
+            }
+        }
+    })
+        .state('app.allCampaigns', {
+        url: '/allCampaigns',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/allCampaigns.html',
+                controller: 'AllCampaignsCtrl'
+            },
+            'fabContent': {
+                template: '<button id="fab-allCampaigns" class="button button-fab button-fab-top-left expanded button-balanced-900 spin"><i class="icon ion-plus-circled"></i></button>',
+                controller: function ($timeout) {
+                    $timeout(function () {
+                        document.getElementById('fab-allCampaigns').classList.toggle('on');
                     }, 900);
                 }
             }
@@ -157,7 +174,7 @@ angular.module('MTPOC', ['ionic','ionic-material','ngCordova','ionic.service.pus
                 controller: 'GalleryCtrl'
             },
             'fabContent': {
-                template: '<button id="fab-gallery" class="button button-fab button-fab-top-right expanded button-energized-900 drop"><i class="icon ion-ios-keypad"></i></button>',
+                template: '<button id="fab-gallery" class="button button-fab button-fab-bottom-right expanded button-royal drop"><i class="icon ion-plus-round"></i></button>',
                 controller: function ($timeout) {
                     $timeout(function () {
                         document.getElementById('fab-gallery').classList.toggle('on');
@@ -208,8 +225,18 @@ angular.module('MTPOC', ['ionic','ionic-material','ngCordova','ionic.service.pus
       'fabContent': ''
     }
   })
+
+   .state('loading', {
+    url: '/loading',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/loading.html'
+      },
+      'fabContent': ''
+    }
+  })
     ;
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/welcome/home');
+    $urlRouterProvider.otherwise('/loading');
 });

@@ -1,6 +1,6 @@
 <ion-side-menus enable-menu-with-back-views="true">
     <ion-side-menu-content>
-        <ion-nav-bar class="bar-calm-900" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
+        <ion-nav-bar class="bar-positive" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
             <ion-nav-back-button class="no-text">
             </ion-nav-back-button>
             <ion-nav-buttons side="right">
@@ -13,61 +13,68 @@
     </ion-side-menu-content>
     <ion-side-menu side="right">
         <ion-header-bar class="dark-bg expanded">
-            <span class="avatar" style="background: url('img/crown.jpg'); background-size: cover;"></span>
-            <h2>Thronester</h2>
+            <span class="avatar menu-logo"></span>
+            <h2 class="text menu-hader">Money Tunes</h2>
         </ion-header-bar>
         <ion-content class="stable-bg has-expanded-header ">
-            <ion-list>
-                <ion-item nav-clear menu-close ui-sref="app.activity">
-                    Activity
-                </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.login">
-                    Login
-                </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.profile">
-                    Profile
-                </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.allUsers">
-                    Friends
-                </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.gallery">
-                    Gallery
-                </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.dialpad">
-                    Dialpad
-                </ion-item>
-                <ion-item nav-clear menu-close ng-click="logout()">
-                    Logout
-                </ion-item>
-            </ion-list>
-            <div class="list">
 
-  <a class="item item-icon-left" href="#">
-    <i class="icon ion-email"></i>
-    Check mail
-  </a>
+             <div class="list">
 
-  <a class="item item-icon-left item-icon-right" href="#">
-    <i class="icon ion-chatbubble-working"></i>
-    Call Ma
-    <i class="icon ion-ios-telephone-outline"></i>
-  </a>
+              <a ng-if="!MainUserBinding.isFull" class="item item-icon-left" menu-close ui-sref="app.profile">
+                <i class="icon ion-ios-person"></i>
+                <div class="dark">Profile</div>
+                <span class="item-note">
+                  {{MainUserBinding.phone_number}}
+                </span>
+              </a>
+              <a ng-if="MainUserBinding.isFull" class="item item-avatar item-icon-right" menu-close ui-sref="app.profile"> 
+                    <img ng-src="{{MainUserBinding.profileImageURL}}">
+                    <h2 class="dark">{{MainUserBinding.displayName}}</h2>
+                    </div>
+                    
+                     </a>
 
-  <a class="item item-icon-left" href="#">
-    <i class="icon ion-mic-a"></i>
-    Record album
-    <span class="item-note">
-      Grammy
-    </span>
-  </a>
 
-  <a class="item item-icon-left" href="#">
-    <i class="icon ion-person-stalker"></i>
-    Friends
-    <span class="badge badge-assertive">0</span>
-  </a>
 
-</div>
+
+              <a class="item item-icon-left calm-900 " menu-close ui-sref="app.wallet-connect">
+                <i class="icon ion-card"></i>
+                <div class="dark">Conect To Wallet</div>
+              </a>
+              <a class="item item-button-right item-icon-left " ng-disabled="MainUserBinding.isFull" menu-close ui-sref="app.sing-up">
+                <i class="icon ion-log-in balanced "></i>
+                <div class="dark">Sing-up</div> 
+                <button class="button button-positive " ng-click="socialLogin('facebook')">
+                  <i class="icon ion-social-facebook facebook-button"></i>
+                </button>   
+              </a>
+               <a class="item item-icon-left assertive" menu-close ng-click="logout()">
+                <i class="icon ion-log-out "></i>
+                <div class="dark">Logout</div>
+              </a>
+              
+              <div class="item item-divider">
+                
+              </div>
+
+              <a class="item item-icon-left" menu-close ui-sref="app.gallery">
+                <i class="icon ion-pricetags royal"></i>
+                <div class="dark">All Campaigns</div>
+                <span class="badge badge-royal">{{campaignsCount}}</span>
+              </a>
+              <a class="item item-icon-left" menu-close ui-sref="app.allUsers">
+                <i class="icon ion-person-stalker calm"></i>
+                <div class="dark">All Users</div>
+                <span class="badge badge-light">{{usersCount}}</span>
+              </a>
+               <a class="item item-icon-left" menu-close ui-sref="app.settings">
+                <i class="icon ion-settings dark"></i>
+                <div class="dark">Settings</div>
+                
+              </a>
+
+
+            </div>
         </ion-content>
     </ion-side-menu>
 </ion-side-menus>

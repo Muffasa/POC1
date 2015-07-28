@@ -95,6 +95,39 @@ angular.module('view.controllers', [])
             fabs[0].remove();
         }
     };
+    $scope.socialLogin =  function(provider) {
+        $rootScope.showLoading();
+        if(provider)
+        {
+          User.socialAuth(provider).then(function(authData) {
+          console.log("Logged in as:", authData.uid);
+          $rootScope.hideLoading();
+        },function(error) {
+          if(error=="no user found on db"){
+
+            $ionicPopup.alert({
+              title:"Not registered",
+              subTitle:"Your are not registered yet, please verify your phone number first."
+
+            }).then(function(res){
+              $ionicHistory.goBack();
+            })
+          }
+          console.error("Authentication failed:", error);
+          $rootScope.hideLoading();
+        });
+      }
+      else{
+        User.regularAuth($scope.email,$scope.password).then(function(authData){
+          console.log("regular login success");
+          $rootScope.hideLoading();
+        },
+        function(error){
+          console.log("wrong email or password");
+          $rootScope.hideLoading(); 
+        });
+      }
+  };
 })
 
 
@@ -165,7 +198,60 @@ angular.module('view.controllers', [])
   });
     
 })
+.controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion,CampaignsService) {
+  $scope.allCampaigns = CampaignsService.getAllCampaigns();
+  $scope.allCampaigns.$watch(function(event){
+    if($scope.allowMotion)
+    {
+        campaignsMotion();
+    }
+  })
 
+  var campaignsMotion = function(){
+            $timeout(function() {
+              $scope.isExpanded = true;
+              $scope.$parent.setExpanded(true);
+          }, 300);
+
+
+          
+
+          ionicMaterialInk.displayEffect();
+
+          ionicMaterialMotion.pushDown({
+              selector: '.push-down'
+          });
+          ionicMaterialMotion.fadeSlideInRight({
+              selector: '.animate-fade-slide-in .item'
+          });
+  }
+
+    
+    $scope.allowMotion=false;
+    
+
+    $scope.$on('$ionicView.beforeEnter', function() {
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.isExpanded = true;
+    $scope.$parent.setExpanded(true);
+    $scope.$parent.setHeaderFab('left');
+
+    $scope.$on('ngRepeatFinished', function() {
+      $scope.allowMotion=true;
+      campaignsMotion();
+    })
+    if($scope.allowMotion)
+    {
+        campaignsMotion();
+    }
+
+
+  
+  });
+
+ 
+})
 .controller('ProfileCtrl', function($scope,$rootScope,$state, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
     
 $scope.$on('$ionicView.beforeEnter', function() {
@@ -200,7 +286,8 @@ $scope.$on('$ionicView.beforeEnter', function() {
 
     $scope.isFull =false;
      $scope.$on('$ionicView.beforeEnter', function() {
-
+     
+     if($rootScope.MainUser)
       if($rootScope.MainUser.isFull){
           $scope.isFull =true;
           $scope.profilePicture=$rootScope.MainUser.profileImageURL;
@@ -255,25 +342,7 @@ $scope.$on('$ionicView.beforeEnter', function() {
   });
 })
 
-.controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
-  $scope.$on('$ionicView.enter', function() {
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
-    $scope.$parent.setHeaderFab(false);
 
-    // Activate ink for controller
-    ionicMaterialInk.displayEffect();
-
-    ionicMaterialMotion.pushDown({
-        selector: '.push-down'
-    });
-    ionicMaterialMotion.fadeSlideInRight({
-        selector: '.animate-fade-slide-in .item'
-    });
-   });
-})
 
 .controller('DialpadCtrl', function($scope,$rootScope,$state,$ionicPopup, $http,User,$ionicModal,socket,ionicMaterialInk) {
             
@@ -349,148 +418,7 @@ $scope.$on('$ionicView.beforeEnter', function() {
 
          })
 
-/*.controller('LiveConnectionCtrl', function($scope,$rootScope,$state,$stateParams,$ionicModal,$ionicHistory,socket) {
-     //idle calling ringing ongoing
-     $scope.peerUser = $rootScope.peerUser;
-     $scope.$on('$ionicView.enter', function() {
-         $scope.$parent.hideHeader();
-         $scope.$parent.myClearFabs();
-         if($stateParams.connectionState=="calling")
-         {
 
-            $ionicModal.fromTemplateUrl('templates/modals/calling-modal.html', {
-              scope: $scope,
-              animation: 'slide-in-up',
-              backdropClickToClose: false,
-              hardwareBackButtonClose: false
-            }).then(function(modal) {
-              $scope.callingModal = modal;
-            $scope.callingModal.show();
-              $rootScope.$broadcast('callingModal.show');
-
-            },function(error){
-              console.log(error);
-            });
-
-            socket.on("answered",function(){
-                $scope.callingModal.remove();
-                $scope.$broadcast('timer-start');
-            })
-            setTimeout(function() {
-                alert("no Answer");
-                $scope.abortCall();
-
-            }, 180000);
-
-         }
-         if($stateParams.connectionState=="ringing"){
-
-             $ionicModal.fromTemplateUrl('templates/modals/incoming-call-modal.html', {
-              scope: $scope,
-              animation: 'slide-in-up',
-              backdropClickToClose: false,
-              hardwareBackButtonClose: false
-            }).then(function(modal) {
-              $scope.incomingCallModal = modal;
-
-              $scope.incomingCallModal.show();
-              setTimeout(function() {
-                $rootScope.$broadcast('incomingCallModal.show');
-              }, 1000);
-              
-
-            },function(error){
-              console.log(error);
-            });
-
-              
-         }
-         if($stateParams.connectionState=="ongoing")
-         $scope.$broadcast('timer-start');
-       });
-
-     $scope.$on('$ionicView.leave', function() {
-
-      $scope.$broadcast('timer-reset');
-       });
- 
-      
-        $scope.micOn=false;
-     $scope.speaker = function(){
-          $scope.micOn=!$scope.micOn;
-          $scope.micOn? $rootScope.TwilioClient.setSpeaker("on"):$rootScope.TwilioClient.setSpeaker("off");
-        };
-
-       $scope.showForm=false; 
-       $scope.focusInput=false;
-       $scope.dialpadShow=false;
-     $scope.toggleDialpad = function(){
-          $scope.dialpadShow=!$scope.dialpadShow;
-          $scope.showForm=!$scope.showForm; 
-          $scope.focusInput=!$scope.focusInput;
-        };
-
-     $scope.hangup = function(){
-      $rootScope.TwilioClient.hangup();
-      $ionicHistory.goBack(); 
-
-     }   
-     $scope.abortCall = function(){
-        if(window.cordova)
-        $rootScope.TwilioClient.hangup();
-        $scope.callingModal.remove();
-        $ionicHistory.goBack();
-     }
-     $scope.showDialpad = function(){
-        $scope.dialpadShow=!$scope.dialpadShow;
-        if(!$scope.dialpadShow)
-        {
-          $scope.dialpadModal.hide();
-        }
-        else{
-                $ionicModal.fromTemplateUrl('templates/modals/dialpad-modal.html', {
-                  scope: $scope,
-                  animation: 'slide-in-up',
-                  backdropClickToClose: true,
-                  hardwareBackButtonClose: true
-                }).then(function(modal) {
-                  $scope.dialpadModal = modal;
-
-                  $scope.dialpadModal.show();
-                  $scope.$broadcast('dialpadModal.show');
-
-                },function(error){
-                  console.log(error);
-                });
-               
-           }
-
-     }
-
-     $scope.dialpadInput="";
-     $scope.pressed = function (num){
-              $scope.dialpadInput+=num;
-              $rootScope.TwilioClient.sendDigits(num);
-            };
-     $scope.removed = function (){
-              $scope.dialpadInput=$scope.dialpadInput.slice(0,$scope.dialpadInput.length - 1);
-            }
-     
-
-                 $scope.$on('callingModal.removed', function() {
-                        $scope.dialpadModal.remove();
-                  });
-                 $scope.$on('dialpadModal.hidden', function() {
-                        $scope.dialpadShow=false;
-                  });
-     socket.on("answered",function(){
-      $scope.answered=true;
-     })
-
-
-
-
-})*/
 
 
 

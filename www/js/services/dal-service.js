@@ -113,7 +113,7 @@ angular.module("dal.service",[])
       .service("CampaignsService", ['$q','$firebaseArray','$firebaseObject','$http',
    function($q,$firebaseArray,$firebaseObject,$http) {
 
-    //var campaignsRef = new Firebase("https://mtdemo.firebaseio.com/campaigns");
+    var campaignsRef = new Firebase("https://mtdemo.firebaseio.com/campaigns");
     
         var getCampaignById=function (cid){
               var campaignRef = new Firebase("https://mtdemo.firebaseio.com/campaigns/"+cid);

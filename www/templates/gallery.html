@@ -1,41 +1,45 @@
-<ion-view view-title="Gallery">
+<ion-view view-title="Campaign Bank" class="myUnique3">
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
-        <div class="list half">
-            <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
-                <div class="ink dark-bg">
-                    <h2>Hmm. Hope nobody destroys this!</h2>
-                    <img class="full-image" src="img/sansa-snowcastle.png">
+     <div class="list half">
+            <div  ng-repeat="campaign in allCampaigns" on-finish-render="ngRepeatFinished" ng-if="$even" class="card card-gallery item item-text-wrap">
+                <div class="ink dark-bg"  >
+                    <h2>{{campaign.name}}</h2>
+                    <img ng-if="campaign.image" class="full-image" src="{{campaign.image.src}}">
+                    <img ng-if="!campaign.image" class="full-image" src="img/icon.png">
                 </div>
-                <div class="item tabs tabs-secondary tabs-icon-left">
-                    <a class="tab-item stable-bg assertive">
-                        <i class="icon ion-heart"></i>
-                        6
+                <div class=" text2 item tabs tabs-secondary tabs-icon-left" style="background-color: rgba(0, 0, 0, 1);">
+                    <a ng-audio="{{campaign.audio.src}}" my-src="{{campaign.audio.src}}" disablePreload="true" class="tab-item stable-bg balanced">
+                        <i class="icon ion-ios-musical-notes blay-ztop"></i>
+                        Play Campaign 
                     </a>
                     <a class="tab-item stable-bg positive-900">
-                        <i class="icon ion-chatbubbles"></i>
-                        1
+                        <i class="icon ion-information-circled"></i>
+                        More info
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list half">
+            <div  ng-repeat="campaign in allCampaigns" on-finish-render="ngRepeatFinished" ng-if="$odd" class="card card-gallery item item-text-wrap">
+                <div class="ink dark-bg"  >
+                    <h2>{{campaign.name}}</h2>
+                    <img ng-if="campaign.image" class="full-image" src="{{campaign.image.src}}">
+                    <img ng-if="!campaign.image" class="full-image" src="img/icon.png">
+                </div>
+                <div class=" text2 item tabs tabs-secondary tabs-icon-left" style="background-color: rgba(0, 0, 0, 1);">
+                    <a ng-audio="{{campaign.audio.src}}" my-src="{{campaign.audio.src}}" disablePreload="true" class="tab-item stable-bg balanced">
+                        <i class="icon ion-ios-musical-notes blay-ztop"></i>
+                        Play Campaign 
+                    </a>
+                    <a class="tab-item stable-bg positive-900">
+                        <i class="icon ion-information-circled"></i>
+                        More info
                     </a>
                 </div>
             </div>
         </div>
 
-        <div class="list half">
-            <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
-                <div class="ink dark-bg">
-                    <h2>ohai!</h2>
-                    <img class="full-image" src="img/sansa-snowcastle4.jpg">
-                </div>
-                <div class="item tabs tabs-secondary tabs-icon-left">
-                    <a class="tab-item stable-bg assertive">
-                        <i class="icon ion-heart"></i>
-                        8
-                    </a>
-                    <a class="tab-item stable-bg positive-900">
-                        <i class="icon ion-chatbubbles"></i>
-                        0
-                    </a>
-                </div>
-            </div>
-        </div>
+
+
     </ion-content>
 </ion-view>

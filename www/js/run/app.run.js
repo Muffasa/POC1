@@ -2,6 +2,9 @@ angular.module("MTPOC")
 
 .run(function($ionicPlatform,$rootScope,$ionicLoading,$cordovaSplashscreen,User) {
   $ionicPlatform.ready(function() {
+    //if(window.cordova)
+    //$cordovaSplashscreen.show();
+
 	if(window.debugMode)
     User.debugAuth(window.debugState);
     else{
@@ -10,7 +13,7 @@ angular.module("MTPOC")
             User.auth().then(function(user){
               console.log("user has a token, connected as user:"+$rootScope.MainUser.phone_number);
 
-              if(window.cordova)//ionic.Platform.isAndroid())
+              if(window.cordova)
                $cordovaSplashscreen.hide();
 
             });
@@ -20,7 +23,7 @@ angular.module("MTPOC")
 
             User.unauth();
 
-            if(window.cordova)//ionic.Platform.isAndroid())
+            if(window.cordova)
             $cordovaSplashscreen.hide();
           }
     }

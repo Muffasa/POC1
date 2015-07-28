@@ -58,7 +58,7 @@
   text-align: center;
 }
 
-.spinner svg {
+.spinnerCalling svg {
   width: 70% !important;
   height: 70% !important;
 }
@@ -71,6 +71,16 @@
   font-variant: normal;
   text-align: center;
   text-shadow: 3px 3px 3px #120000;
+}
+.text2 {
+  //background-color: #428EFF;
+  color: #FFFFFF;
+  font-weight: bolder;
+  //max-font-size: 30px;
+  //font-size: 20px;
+  font-variant: normal;
+  text-align: center;
+  text-shadow: 0px 0px 0px #120000;
 }
 .shadower{
   text-shadow: 3px 3px 3px #120000;
@@ -124,6 +134,27 @@
           background: url(../img/notesbackground.jpg) center;
            background-size: cover;
         }
+        .myUnique2 {
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+          background: url(../img/FLOATING-MUSIC-NOTES.jpg) center;
+           background-size: cover;
+        }
+        .myUnique3 {
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+          background: url(../img/floating-notes.jpg) center;
+           background-size: cover;
+        }  
+ .myUnique4 {
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+          background: url(../img/MTPOClogin.jpg) center;
+           background-size: cover;
+        }             
  .app-logo
  {
  	background-image: url(../img/Teicon.png);
@@ -132,5 +163,9 @@
                                 border-radius: 50%;
                                 width: 145px;
                                 height: 145px;
- }       
+ }  
+ .play-stop-text{
+  max-font-size: 10px !important;
+  text-shadow: 3px 3px 3px #120000;
+ }     
 

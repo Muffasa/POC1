@@ -103,6 +103,7 @@ angular.module('register.services',[])
                       TokensGenerator.getUidByPhoneNumber(window.localStorage.getItem('phoneNumber')).then(function(uid){
                          setCurrentUser(uid).then(function(user){
                           //reRequireTokens(user);
+                          
                           if(!user.isFull)
                           $state.go('app.sing-up');
                           else
