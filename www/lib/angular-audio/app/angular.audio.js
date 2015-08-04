@@ -14,10 +14,11 @@ angular.module('ngAudio', [])
             //ngAudio:'='
         },
         controller: function($scope, $attrs, $element, $timeout) {
-            $scope.playing=false;
+            
             /* Loads the sound from destination */
             var audio;
             function initSound(){
+                $scope.playing=false;
                 //audio = ngAudio.load($attrs.ngAudio);
                 audio = ngAudio.load($scope.mySrc);
                 /* Add audio to local scope for modification with nested inputs */

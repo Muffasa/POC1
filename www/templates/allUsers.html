@@ -6,7 +6,7 @@
                     
                     <a ng-click="showOptions(user)"   ng-repeat="user in allAppUsers" on-finish-render="ngRepeatFinished" class="item item-avatar item-icon-right shadower">
                     
-                    <img ng-if="user.profileImageURL" src="{{user.profileImageURL}}">
+                    <img ng-if="user.profileImageURL" ng-src="{{user.profileImageURL}}">
                     <img src="img/no-image.png" ng-if="!user.profileImageURL">
                     <div class="backgrounder shadower" style="margin-right:20%">
                     <h2 class="white">{{user.displayName}}</h2>

@@ -131,12 +131,27 @@ angular.module("dal.service",[])
               var d = $q.defer();
 
                      return d.promise;
+             },
+             getRandomCampaignId:function(){
+              var d =$q.defer();
+                 var allCampaigns = $firebaseArray(campaignsRef);
+                 allCampaigns.$loaded(function(){
+                  //d.resolve(allCampaigns[Math.floor((Math.random() * allCampaigns.length))].cid);
+                  d.resolve(allCampaigns[2].cid)
+                 },function(error){
+                  d.resolve(error);
+                 })
+                 return d.promise;
+
+
+
+
              }
         };
     }])
 
-    .factory("ConversationF", ['$rootScope','$q','$http','$firebaseArray','$firebaseObject','UsersService','$timeout',
-    function($rootScope,$q,$http,$firebaseArray,$firebaseObject,UsersService,$timeout){
+    .factory("ConversationF", ['$rootScope','$q','$http','$firebaseArray','$firebaseObject','UsersService','$timeout','CampaignsService',
+    function($rootScope,$q,$http,$firebaseArray,$firebaseObject,UsersService,$timeout,CampaignsService){
   
 
       var usersRef = new Firebase("https://mtdemo.firebaseio.com/users");
@@ -235,15 +250,22 @@ angular.module("dal.service",[])
                           $rootScope.binds.peerConvManager.$ref().child('peerCaller').set($rootScope.MainUser,function(error){
                           console.log(error);
                           });
-                          $rootScope.binds.peerConvManager.$ref().child('status').set("connecting",function(error){
-                            console.log(error);
-                          });
+                          
+                          CampaignsService.getRandomCampaignId().then(function(cid){
+                             $rootScope.binds.peerConvManager.$ref().child('currentCampaignId').set(cid,function(error){
+                              console.log(error);
+                              });
+                              $rootScope.binds.peerConvManager.$ref().child('status').set("connecting",function(error){
+                              console.log(error);
+                              });
+                           });
+                         
                           $rootScope.binds.peerConvManager.$loaded(function(data){
 
-                          })
+                          });
                           $rootScope.peerUser.$loaded(function(data){
                             $rootScope.$broadcast('outgoingCall',peer_uid);
-                          })
+                          });
                       }
                       else{
                         alert("line is busy");
@@ -266,10 +288,12 @@ angular.module("dal.service",[])
         var endConnection=function(){
           if($rootScope.callType=="incoming")
           {
-            if(getStatus()!="idle"&&getStatus!="ended"){
-            $rootScope.binds.convManager.$ref().child("status").set("ended");
+            if(getStatus!="ended"){
+            $rootScope.binds.convManager.$ref().child("status").set("ended",function(error){
+              setTimeout(function() {resetConveManager();}, 100); 
+            });
             //Log call and init conv Manager
-            resetConveManager();
+            
             $rootScope.$broadcast('connection-ended');
             console.log("connection-ended fired");
             }
@@ -277,7 +301,10 @@ angular.module("dal.service",[])
            else{
             if($rootScope.binds.peerConvManager)
                 {
-                $rootScope.binds.peerConvManager.$destroy(); 
+                $rootScope.binds.peerConvManager.$ref().child("status").set("ended",function(error){
+                  $rootScope.binds.peerConvManager.$destroy(); 
+                })
+                
                 $rootScope.$broadcast('connection-ended');
                console.log("connection-ended fired");  
                }        

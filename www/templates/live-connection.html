@@ -1,44 +1,4 @@
-<!--<ion-view>
-  <ion-content class="has-header has-subheader">
-            
-      <div class="list card">
-        <div ng-hide="answered"class="item item-devider">Calling...{{MainUserTest.connection.status}}</div>
-        <div ng-show="answered"class="item item-devider">Ongoing Call...{{MainUserTest.connection.status}}</div>
 
-
-              <div class="item item-body">
-                    <h2>{{peerUser.displayName}}</h2>
-                    <img class="full-image" src="{{peerUser.profileImageURL}}">
-                    <div >
-                    <timer autostart="false">{{minutes |testfilter }}:{{seconds |testfilter }}</timer>
-                     </div>
-                    
-              </div>
-
-
-
-              <div class="item tabs tabs-secondary">
-                    <a class="tab-item " ng-click="speaker()">
-                      <i class="icon ion-android-microphone" ng-class="{'icon ion-android-microphone-off':micOn,'icon ion-android-microphone':!micOn}"></i>
-                      
-                    </a>
-                    <a class="tab-item " ng-click="toggleDialpad()">
-                      <i class="icon ion-ios-keypad-outline" ng-class="{'icon ion-ios-keypad-outline':!dialpadShow,'icon ion-ios-keypad':dialpadShow}" ></i>
-                      
-                    </a>
-                    <a class="tab-item assertive" ng-click="hangup()">
-                      <i class="icon ion-close-circled"></i>
-                      
-                    </a>
-                  </div>
-
-                    <div class="item" ng-show="showForm">
-                  <input type="tel" ng-model="userInput" focus-me="focusInput" > {{ myInput }}
-            </div>
-
-    </div>
-  </ion-content>
-</ion-view>-->
 <ion-view>
   <ion-content scroll="false" style="background-color: #555555 !important;
   background-size: cover !important;">

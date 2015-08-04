@@ -5,36 +5,44 @@ angular.module('MTPOC')
 
       
       $rootScope.$on("incomingCallModal.show",function(){
-         initRington().then(function(){
-          $rootScope.rington.play();
-        },function(error){
-          console.log(error);
-        });
-          
+          //mainInitRington();
+          if(!$scope.rington)
+          initRington().then(function(){
+            $scope.rington.play();
+          });
        // $scope.$broadcast('timer-set-countdown',$rootScope.currentCampaign.lenght);
         $scope.$broadcast('timer-start');
       });
+      $scope.$on('timer-stopped', function (event, data){
+                //Works!!!
+            });
+
+
+
       $scope.peerUser = $rootScope.MainUserBinding.convManager.peerCaller;
-      var campaign = CampaignsService.getCampaignById($rootScope.MainUserBinding.convManager.currentCampaignId);
-      campaign.$loaded(function(data){
-        $scope.currentCampaign = data;
-      })
-      $scope.currentCampaign=$rootScope.MainUserBinding.convManager.currentCampaign;
+      $scope.currentCampaign = CampaignsService.getCampaignById($rootScope.MainUserBinding.convManager.currentCampaignId);
+      //campaign.$loaded(function(data){
+      //  $scope.currentCampaign = data;
+    // })
+
       var initRington = function(){
         var d =$q.defer();
+        if(!$scope.rington){
         MediaSrv.loadMedia('./Assets/rington.mp3').then(function(media)
           {
-            if(!$rootScope.rington)
-            $rootScope.rington=media;
-            d.resolve();
-          
+             media.setLoop(true);
 
-            
+            $scope.rington=media;
+            d.resolve();
+        
           },function(error){
             d.reject(error);
           })
-        return d.promise;
+        
       };
+      d.resolve();
+      return d.promise;
+    }
 
       
      // $scope.From = JSON.parse($scope.from);
@@ -46,9 +54,10 @@ angular.module('MTPOC')
               $rootScope.TwilioClient.answer();
               else
                 ConversationF.answer();
-              $rootScope.rington.pause();
-              $rootScope.rington.reset(); 
+              $scope.rington.pause();
+              $scope.rington.reset(); 
               $scope.incomingCallModal.remove();
+              $rootScope.$broadcast("incomingCallModal.removed");
 
               socket.emit("answered",$rootScope.MainUser.phone_number);
 
@@ -62,10 +71,10 @@ angular.module('MTPOC')
         $rootScope.TwilioClient.reject();
         else
           ConversationF.reject();
-        $rootScope.rington.pause();
-        $rootScope.rington.reset();
-        initRington();
+        $scope.rington.pause();
+        $scope.rington.reset();
         $scope.incomingCallModal.remove();
+        $rootScope.$broadcast("incomingCallModal.removed");
         $state.go("app.profile");
      }
       /*$scope.reject = function(){
@@ -82,18 +91,16 @@ angular.module('MTPOC')
       };
       $scope.$on('$destroy',function(){
         unRegisterEnded();
-        $rootScope.rington.pause();
-        $rootScope.rington.reset();
-        initRington();
+        $scope.rington.pause();
+        $scope.rington.reset();
         $scope.incomingCallModal.remove();
 
       })
 
       
-     var unRegisterEnded =  $scope.$on('incomingCall:ended',function(){
-         $rootScope.rington.pause();
-         $rootScope.rington.reset();
-         initRington();
+     var unRegisterEnded =  $scope.$on('end-connection',function(){
+         $scope.rington.pause();
+         $scope.rington.reset();
          $scope.incomingCallModal.remove();
 
       });

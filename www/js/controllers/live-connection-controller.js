@@ -1,10 +1,11 @@
 angular.module("live-connection.controller",[])
 
-.controller('LiveConnectionCtrl', function($scope,$rootScope,$state,$stateParams,$ionicModal,$ionicHistory,socket,ConversationF) {
+.controller('LiveConnectionCtrl', function($scope,$rootScope,$state,$stateParams,$ionicModal,$ionicHistory,socket,ConversationF,CampaignsService) {
 
 
         $scope.$on('$ionicView.beforeEnter', function() {
 
+         $scope.dialpadInput="";
 
        
 
@@ -73,9 +74,10 @@ angular.module("live-connection.controller",[])
          if($rootScope.callType=="incoming")
          {    
 
-              //$scope.currentCampaign = $rootScope.binds.peerConvManager.currentCampaign;
-              
+              //$scope.currentCampaign =CampaignsService.getCampaignById($rootScope.binds.convManager.currentCampaignId);
+              $scope.peerUser = $rootScope.MainUserBinding.convManager.peerCaller;
               $scope.convManager=$rootScope.binds.convManager;
+              
               $ionicModal.fromTemplateUrl('templates/modals/incoming-call-modal.html', {
               scope: $scope,
               animation: 'slide-in-up',
@@ -99,8 +101,9 @@ angular.module("live-connection.controller",[])
             
          }
          if($rootScope.callType=="outgoing"){
-            //$scope.currentCampaign = $rootScope.binds.convManager.currentCampaign;
+            $scope.currentCampaign = $rootScope.binds.peerConvManager.currentCampaign;
             $scope.convManager=$rootScope.binds.peerConvManager;
+            $scope.peerUser=$rootScope.peerUser;
            $ionicModal.fromTemplateUrl('templates/modals/calling-modal.html', {
               scope: $scope,
               animation: 'slide-in-up',
@@ -191,6 +194,7 @@ angular.module("live-connection.controller",[])
         ConversationF.endConnection();
       //$ionicHistory.goBack(); 
 
+
      }   
  
 
@@ -220,15 +224,17 @@ angular.module("live-connection.controller",[])
 
      }
 
-     $scope.dialpadInput="";
+     
      
      
 
                  $scope.$on('callingModal.removed', function() {
+                  if($scope.dialpadModal)
                         $scope.dialpadModal.remove();
                         $scope.$broadcast('timer-start');
                   });
                  $scope.$on('incomingCallModal.removed', function() {
+                  if($scope.dialpadModal)
                         $scope.dialpadModal.remove();
                         $scope.$broadcast('timer-start');
                   });

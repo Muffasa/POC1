@@ -4,8 +4,8 @@
             <div  ng-repeat="campaign in allCampaigns" on-finish-render="ngRepeatFinished" ng-if="$even" class="card card-gallery item item-text-wrap">
                 <div class="ink dark-bg"  >
                     <h2>{{campaign.name}}</h2>
-                    <img ng-if="campaign.image" class="full-image" src="{{campaign.image.src}}">
-                    <img ng-if="!campaign.image" class="full-image" src="img/icon.png">
+                    <img ng-if="campaign.image" class="full-image" ng-src="{{campaign.image.src}}">
+                    <img ng-if="!campaign.image" class="full-image" ng-src="img/icon.png">
                 </div>
                 <div class=" text2 item tabs tabs-secondary tabs-icon-left" style="background-color: rgba(0, 0, 0, 1);">
                     <a ng-audio="{{campaign.audio.src}}" my-src="{{campaign.audio.src}}" disablePreload="true" class="tab-item stable-bg balanced">
@@ -23,8 +23,8 @@
             <div  ng-repeat="campaign in allCampaigns" on-finish-render="ngRepeatFinished" ng-if="$odd" class="card card-gallery item item-text-wrap">
                 <div class="ink dark-bg"  >
                     <h2>{{campaign.name}}</h2>
-                    <img ng-if="campaign.image" class="full-image" src="{{campaign.image.src}}">
-                    <img ng-if="!campaign.image" class="full-image" src="img/icon.png">
+                    <img ng-if="campaign.image" class="full-image" ng-src="{{campaign.image.src}}">
+                    <img ng-if="!campaign.image" class="full-image" ng-src="img/icon.png">
                 </div>
                 <div class=" text2 item tabs tabs-secondary tabs-icon-left" style="background-color: rgba(0, 0, 0, 1);">
                     <a ng-audio="{{campaign.audio.src}}" my-src="{{campaign.audio.src}}" disablePreload="true" class="tab-item stable-bg balanced">

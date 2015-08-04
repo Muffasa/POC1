@@ -37,7 +37,7 @@ angular.module("MTPOC")
 		                        }
 		                        if(callStatus=="ended"){
 		                        	console.log("converstion over, going to home view");
-		                        	$rootScope.$broadcast('incomingCall:ended');
+		                        	$rootScope.$broadcast('connection-ended');
 		                        	
 		                        	//$state.go("app.allUsers");
 		                        }
@@ -67,7 +67,7 @@ angular.module("MTPOC")
 							              			
 									                        if(callStatus=="idle"){
 									                             console.log("peer user convManager status is idle,impossible.");
-									                             $rootScope.$broadcast("outgoingCall:ended");
+									                            // $rootScope.$broadcast('connection-ended');
 									                             //$rootScope.binds.peerConvManager.$destroy();
 									                        }
 									                        if(callStatus=="connecting"){
@@ -86,9 +86,9 @@ angular.module("MTPOC")
 									                        	console.log("peer user remote convManager status is ended, unmounting...");
 									                        	$rootScope.binds.peerConvManager.$destroy();
 									                        	//unWatch();
-									                        	$rootScope.callType="";
-									                        	$rootScope.$broadcast("outgoingCall:ended");
-									                        	//$rootScope.$broadcast('connection-ended');
+									                        	
+									                        	
+									                        	$rootScope.$broadcast('connection-ended');
 
 
 									                        }

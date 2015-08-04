@@ -16,6 +16,7 @@
 .Aligner-item--bottom {
   align-self: flex-end !important;
 }
+
   .user-option-modal-location {  
      width: 70%; 
      height: 30% ; 
@@ -35,7 +36,23 @@
      
   }
 
+.campaignImage{
+  width: 70%;
+  margin-left: 15%;
 
+}
+.dropdown-list{
+  //background-color: #555555 !important;
+  width: auto !important;
+  max-width: 80%;
+  margin-left: 10%;
+ 
+}
+.wtf{
+  background-color: #555555 !important;
+  width: auto !important;
+  max-width: 80%;
+}
 .callingBG{
   background-color: #555555 !important;
   background-size: cover !important;

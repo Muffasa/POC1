@@ -25,7 +25,7 @@ angular.module("cordova.services",[])
           // Pause playback of an audio file.
           pause: function(){ sound.pause(); },
           // Releases the underlying operating system's audio resources. Should be called on a ressource when it's no longer needed !
-          release: function(){},
+          release: function(){sound = new Audio(); sound.load();},
           // Moves the position within the audio file.
           seekTo: function(milliseconds){}, // TODO
           // Set the volume for audio playback (between 0.0 and 1.0).
@@ -36,6 +36,8 @@ angular.module("cordova.services",[])
           stopRecord: function(){},
           // Stop playing an audio file.
           stop: function(){ sound.pause(); if(mediaSuccess){mediaSuccess();} },
+
+          setLoop: function(loop){loop? sound.loop=true:sound.loop=false;},
 
           reset: function(){ sound.currentTime=0; } // TODO
         };

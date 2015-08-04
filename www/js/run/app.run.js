@@ -59,22 +59,7 @@ angular.module("MTPOC")
     $rootScope.hideLoading = function() {
       $ionicLoading.hide();
     };
-      $rootScope.currentCampaign = {
-                                            id: 0,
-                                            name: 'Dayatsu',
-                                            length:'14',
-                                            pps: '0.02',
-                                            ppfl: '0.5',
-                                            audioUrl:'./Assets/dayatsu_14s.mp3',
-                                            face: './Assets/logo.jpg'
-                                          };
-     $rootScope.peerUser={
-                                     id: 0,
-                                      displayName: 'Ben Sparrow',
-                                      phone_number: '+972-0544552644',
-                                      face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png',
-                                      profileImageURL: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
-                                    };
+
                                   });
     
 })

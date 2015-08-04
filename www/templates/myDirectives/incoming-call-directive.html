@@ -1,11 +1,118 @@
+   <ion-content scroll="false" style="background-color: #555555 !important;
+  background-size: cover !important;">
 
+<div class="list card" style="background-color: #555555 !important;" >
+  <h3 class="text">Incoming Call From:</h3>
+          <div class="item item-thumbnail">
+
+
+            
+            <h3 ng-if="peerUser.displayName" class="text"> {{peerUser.displayName}}</h3>
+            <h3 ng-if="!peerUser.displayName" class="text">{{peerUser.phone_number}}</h3>
+            <div style="margin-left:38%; max-width:25%; max-height:15%;">
+              <img ng-if="peerUser.profileImageURL" ng-src="{{peerUser.profileImageURL}}" >
+              <img ng-if="!peerUser.profileImageURL" ng-src="img/no-image.png" >
+            </div>
+           
+        </div>
+
+       <!-- <div class="item">
+          <h3  class="text">Your Banner Is Active!</h3>
+          <h4  class="text">Corrent Campaign:</h4>
+        </div>-->
+
+
+        <div class="item item-image">
+                    <h2 class="text">{{currentCampaign.name}}</h2>
+                    <img ng-if="currentCampaign.image" class="campaignImage"  ng-src="{{currentCampaign.image.src}}" style="max-width:100% !important; max-height: 25% !important;">
+                    <img ng-if="!currentCampaign.image"  ng-src="img/icon.png" style="width: 100%; hight: 35% !important;">
+        </div>
+
+        <div class="item">
+          <timer id="timer" countdown="{{currentCampaign.audio.duration}}" interval="1000" autostart="false">
+            <div class="progress progress-striped active {{displayProgressActive}}"> 
+              <div class="text">ppfl:{{currentCampaign.ppfl}} pps:{{currentCampaign.pps }} </div>
+                 <div class="text">{{progressBar}}% to full payment:{{currentCampaign.ppfl}} </div>
+                 <progress max="100" value="{{progressBar}}"></progress>
+                 <div class="text">Current call banner earnings: {{currentCampaign.pps * (currentCampaign.audio.duration - millis/1000)}} </div>
+            </div>
+          </timer>
+        </div>
+
+              <div class="item tabs tabs-secondary text " >
+               <a class="tab-item balanced" ng-click="answer()">
+                      <i class="icon ion-android-call"></i>
+                </a>
+                <a class="tab-item calm" ng-click="messege()">
+                  <i class="icon ion-chatbox" ></i>   
+                </a>
+                <a class="tab-item assertive" ng-click="reject()">
+                  <i class="icon ion-android-cancel"></i>
+                  
+                </a>
+              </div>
+</div>
+
+
+   </ion-content>
+
+
+  <!--<ion-content scroll="false" style="background-color: #555555 !important;
+  background-size: cover !important;">
+
+<div class="row row-top">
+ <div class="col">
+      <h2 ng-if="peerUser.displayName" class="text">Incoming Call From {{peerUser.displayName}}</h2>
+      <h2 ng-if="!peerUser.displayName" class="text">Incoming Call From {{peerUser.phone_number}}</h2>
+ </div>     
+</div>
+      
+
+            <div class="avatar avatarPos" ng-style="{'background-image': 'url(' + peerUser.profileImageURL + ')'}" ng-if="peerUser.profileImageURL"></div>
+      <div class="avatar avatarPos" ng-style="{'background-image': 'url(img/no-image.png)'}" ng-if="!peerUser.profileImageURL"></div>
+
+
+      <h3  class="text">Your Banner Is Active!</h3>
+      <h4  class="text">Corrent Campaign:</h4>
+
+      
+      
+      
+            <div class="card card-gallery item item-text-wrap" style="background-color: #555555 !important;margin-top:40%;">
+                <div class="ink dark-bg"  >
+                    <h2 class="text">{{currentCampaign.name}}</h2>
+                    <img ng-if="currentCampaign.image" class="full-image" ng-src="{{currentCampaign.image.src}}">
+                    <img ng-if="!currentCampaign.image" class="full-image" ng-src="img/icon.png">
+                </div>
+          <timer id="timer" countdown="{{currentCampaign.audio.duration}}" interval="1000" autostart="false">
+            <div class="progress progress-striped active {{displayProgressActive}}"> 
+              <div class="text">ppfl:{{currentCampaign.ppfl}} pps:{{currentCampaign.pps }} </div>
+                 <div class="text">{{progressBar}}% to full payment:{{currentCampaign.ppfl}} </div>
+                 <progress max="100" value="{{progressBar}}"></progress>
+                 <div class="text">Current call banner earnings: {{currentCampaign.pps * (currentCampaign.audio.duration - millis/1000)}} </div>
+            </div>
+          </timer>
+            </div>
+            
+               <div class="tabs tabs-secondary text " style="margin-top:80% !important;background-color: #555555 !important; border-style: none !importand">
+               <a class="tab-item balanced" ng-click="answer()">
+                      <i class="icon ion-android-call"></i>
+                </a>
+                <a class="tab-item calm" ng-click="messege()">
+                  <i class="icon ion-chatbox" ></i>   
+                </a>
+                <a class="tab-item assertive" ng-click="reject()">
+                  <i class="icon ion-android-cancel"></i>
+                  
+                </a>
+              </div>
+        
+        
+
+   </ion-content>
+   <!--
 <div class="Aligner">
 
-
-
-       <!--<div class="Aligner-item Aligner-item--top">…</div>
-        <div class="Aligner-item">…</div>
-        <div class="Aligner-item Aligner-item--bottom">…</div>-->
 
 
       <div class="list card Aligner-item qqqqq" style="top: 30%">
@@ -17,8 +124,8 @@
         </style>
 
         <div class="item item-avatar">
-          <img ng-if="peerUser.profileImageURL" src="{{peerUser.profileImageURL}}" >
-          <img ng-if="!peerUser.profileImageURL" src="(img/no-image.png)" >
+          <img ng-if="peerUser.profileImageURL" ng-src="{{peerUser.profileImageURL}}" >
+          <img ng-if="!peerUser.profileImageURL" ng-src="img/no-image.png" >
           <h2>Incoming Call From:</h2>
           <h3> {{peerUser.displayName}}</h3>
           <p>{{peerUser.phone_number}}</p>
@@ -27,16 +134,16 @@
 
         <div class="item item-body">
 
-          <img class="full-image" src="{{currentCampaign.image.src}}">
+          <img class="full-image" ng-src="{{currentCampaign.image.src}}">
           <h3>{{currentCampaign.name}}</h3>
-          <timer id="timer" countdown="14" interval="1000" autostart="false">
+          <timer id="timer" countdown="{{currentCampaign.audio.duration}}" interval="1000" autostart="false">
             <div class="progress progress-striped active {{displayProgressActive}}"> 
               <p>Don't keep your friend wating for money!<p>
-              <p> but please do if thats your boss=] <p>
+              <p> but please do if thats your boss=] duration {{currentCampaign.audio.duration}} millis:{{millis}} pps:{{currentCampaign.pps}} ppfl:{{currentCampaign.ppfl}} <p>
 
                 {{progressBar}}% 
               <!--<div class="bar" style="min-width: 2em;width: {{progressBar}}%;"></div> -->
-            <progress max="100" value="{{progressBar}}"></progress>
+            <!--<progress max="100" value="{{progressBar}}"></progress>
             </div>
           </timer>
             
@@ -66,3 +173,4 @@
 
 </div>
 
+-->
