@@ -315,6 +315,11 @@ $scope.$on('$ionicView.beforeEnter', function() {
 
 
 
+    $scope.bindingTest=function()
+    {
+      $rootScope.MainUserBind.country = "Israel";
+      $rootScope.MainUserBind.newprop = null;
+    } 
 
     $scope.goToSingin=function()
     {

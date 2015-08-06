@@ -4,14 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('MTPOC', ['ionic','ionic-material','ngCordova','ngAudio','ionic.service.push','ionic.service.core','firebase','btford.socket-io','MTPOC.controllers','MTPOC.services','timer'])
-.filter('testfilter',function(){
-    return function(text){
-        if(parseInt(text)<10)
-            return "0"+text;
-        else return text;
-        
-    }
-})
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -21,6 +14,7 @@ angular.module('MTPOC', ['ionic','ionic-material','ngCordova','ngAudio','ionic.s
     }
     if(window.StatusBar) {
       StatusBar.styleDefault();
+
     }
   });
 

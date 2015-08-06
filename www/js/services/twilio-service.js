@@ -1,5 +1,5 @@
 angular.module('MTPOC')
-.run(function($rootScope,$q,TokensGenerator,socket,ConversationF){
+.run(function($rootScope,$q,TokensGenerator,socket,ConversationF,CampaignInjector){
 
       $rootScope.$on('MainUserSet',function(){
       	if(window.cordova)
@@ -28,14 +28,21 @@ angular.module('MTPOC')
 									if(!$rootScope.Twilio.initialized)
 										d.reject("Twilio not initialized");
 									else{
-									      $rootScope.connection = $rootScope.Twilio.Device.connect({ // Connect our call.
-						                  CallerId:'+97243741132', // Your Twilio number (Format: +15556667777).
-						                  callFrom: $rootScope.Twilio.userPhoneNumber,
-						                  //PhoneNumber:'<Enter number to call here>',
-						                  callTo:to // Number to call (Format: +15556667777).
-						               });
-									ConversationF.connect(to);      
-									d.resolve($rootScope.connection);
+										  ConversationF.connect(to).then(function(){
+                                              
+                                              $rootScope.connection = $rootScope.Twilio.Device.connect({ 
+								                  CallerId:'+97243741132', 
+								                  callFrom: $rootScope.Twilio.userPhoneNumber,				
+								                  callTo:to,
+								                  campaignId:$rootScope.PeerUserBind.convManager.currentCampaignId//$rootScope.binds.peerConvManager.currentCampaignId
+								                  });
+													      
+													d.resolve($rootScope.connection);
+
+										  });
+									      
+										
+	
 									}
 
 									return d.promise;

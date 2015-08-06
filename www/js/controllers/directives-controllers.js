@@ -5,6 +5,7 @@ angular.module('MTPOC')
 
       
       $rootScope.$on("incomingCallModal.show",function(){
+
           //mainInitRington();
           if(!$scope.rington)
           initRington().then(function(){
@@ -12,15 +13,24 @@ angular.module('MTPOC')
           });
        // $scope.$broadcast('timer-set-countdown',$rootScope.currentCampaign.lenght);
         $scope.$broadcast('timer-start');
+        $scope.myTimer = setInterval(function(){
+        
+        },1000)
       });
       $scope.$on('timer-stopped', function (event, data){
-                //Works!!!
+                clearInterval($scope.myTimer);
+               // $scope.currentCampaign = CampaignsService.getCampaignById($rootScope.MainUserBinding.convManager.currentCampaignId);
+              //  $scope.$broadcast('timer-start');
+               // $scope.myTimer = setInterval(function(){
+        
+              //  },1000)
+
             });
 
 
 
       $scope.peerUser = $rootScope.MainUserBinding.convManager.peerCaller;
-      $scope.currentCampaign = CampaignsService.getCampaignById($rootScope.MainUserBinding.convManager.currentCampaignId);
+      $scope.currentCampaign =  CampaignsService.getCampaignById($rootScope.MainUserBinding.convManager.currentCampaignId);//$rootScope.MainUserBinding.convManager.currentCampaign;
       //campaign.$loaded(function(data){
       //  $scope.currentCampaign = data;
     // })

@@ -24,8 +24,8 @@
 
         <div class="item item-image">
                     <h2 class="text">{{currentCampaign.name}}</h2>
-                    <img ng-if="currentCampaign.image" class="campaignImage"  ng-src="{{currentCampaign.image.src}}" style="max-width:100% !important; max-height: 25% !important;">
-                    <img ng-if="!currentCampaign.image"  ng-src="img/icon.png" style="width: 100%; hight: 35% !important;">
+                    <img ng-if="currentCampaign.image" class="campaignImage"  ng-src="{{currentCampaign.image.src}}" style="max-width:100% !important; max-height: 20% !important;">
+                    <img ng-if="!currentCampaign.image"  ng-src="img/icon.png" style="max-width:100% !important; max-height: 20% !important;">
         </div>
 
         <div class="item">
@@ -34,7 +34,7 @@
               <div class="text">ppfl:{{currentCampaign.ppfl}} pps:{{currentCampaign.pps }} </div>
                  <div class="text">{{progressBar}}% to full payment:{{currentCampaign.ppfl}} </div>
                  <progress max="100" value="{{progressBar}}"></progress>
-                 <div class="text">Current call banner earnings: {{currentCampaign.pps * (currentCampaign.audio.duration - millis/1000)}} </div>
+                 <div class="text">Current call earnings: pps:{{currentCampaign.pps }} duration:{{currentCampaign.audio.duration}} {{(currentCampaign.audio.duration)}}<!-- * parseFloat((parseFloat(currentCampaign.audio.duration) - parseFloat(millis/1000))}} --></div>
             </div>
           </timer>
         </div>

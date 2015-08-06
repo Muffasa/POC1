@@ -19,6 +19,7 @@ angular.module('ngAudio', [])
             var audio;
             function initSound(){
                 $scope.playing=false;
+                $scope.initialized=true;
                 //audio = ngAudio.load($attrs.ngAudio);
                 audio = ngAudio.load($scope.mySrc);
                 /* Add audio to local scope for modification with nested inputs */
@@ -33,6 +34,7 @@ angular.module('ngAudio', [])
             }        
             
             audio.complete(function(){
+                if($scope.initialized)
                 myOperation();
             })
 

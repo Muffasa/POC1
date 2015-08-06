@@ -92,7 +92,15 @@ angular.module("dal.service",[])
                  }
 
                 return d.promise;
-             },     
+             },  
+             updateMainUserLocation:function(location){
+                  var d = $q.defer();
+
+                  var mainUser=getUserById($rootScope.MainUser.uid);
+
+
+                return d.promise;
+             },    
              mergeFullUser: function(phone_number,socialData){
                               var d = $q.defer();
                               var data = {
@@ -122,32 +130,40 @@ angular.module("dal.service",[])
       
         return {
 
-            getAllCampaigns: function(){  
+                getAllCampaigns: function(){  
 
-              return $firebaseArray(campaignsRef);
-            },
-            getCampaignById:getCampaignById ,
-            getCampaignByName:function(name){
-              var d = $q.defer();
+                  return $firebaseArray(campaignsRef);
+                },
+                getCampaignById:getCampaignById ,
+                getCampaignByName:function(name){
+                  var d = $q.defer();
 
+                         return d.promise;
+                 },
+                 getRandomCampaignId:function(){
+                  var d =$q.defer();
+                     var allCampaigns = $firebaseArray(campaignsRef);
+                     allCampaigns.$loaded(function(){
+                      //d.resolve(allCampaigns[Math.floor((Math.random() * allCampaigns.length))].cid);
+                      d.resolve(allCampaigns[2].cid)
+                     },function(error){
+                      d.resolve(error);
+                     })
                      return d.promise;
-             },
-             getRandomCampaignId:function(){
-              var d =$q.defer();
-                 var allCampaigns = $firebaseArray(campaignsRef);
-                 allCampaigns.$loaded(function(){
-                  //d.resolve(allCampaigns[Math.floor((Math.random() * allCampaigns.length))].cid);
-                  d.resolve(allCampaigns[2].cid)
-                 },function(error){
-                  d.resolve(error);
-                 })
-                 return d.promise;
 
+                 },
+                 getCampaignIdByUserId:function(uid){
+                    var d = $q.defer();
+                              $http.get('http://188.226.198.99:3000/CampaignSlector/'+uid)
+                               .success(function(cid){
+                                  d.resolve(cid);
+                                },function(error){
+                                  d.reject(error);
+                                });
+                    return d.promise;
 
-
-
-             }
-        };
+                  }
+           }
     }])
 
     .factory("ConversationF", ['$rootScope','$q','$http','$firebaseArray','$firebaseObject','UsersService','$timeout','CampaignsService',
@@ -215,6 +231,7 @@ angular.module("dal.service",[])
           var d = $q.defer();
           $rootScope.callType="";
              var resetCM = {
+                ownerId:$rootScope.MainUser.uid,
                 status:'idle',
                 peerCaller:"",
                 currentCampaign:""
@@ -240,35 +257,56 @@ angular.module("dal.service",[])
               return d.promise;
             };
        var bindPeerConvM=function (peer_phone_number){
+        var d =$q.defer();
               UsersService.getUidByPhoneNumber(peer_phone_number).then(function(peer_uid){
                 var peerConvMRef = new Firebase("https://mtdemo.firebaseio.com/users/"+peer_uid+"/convManager");
                 var peerRef = new Firebase("https://mtdemo.firebaseio.com/users/"+peer_uid);
                 $rootScope.binds.peerConvManager=$firebaseArray(peerConvMRef);
                 $rootScope.peerUser = $firebaseObject(peerRef);
+                $rootScope.peerUser.$bindTo($rootScope,"PeerUserBind").then(function(unbindF){
+                  $rootScope.unBindPeerUser = unbindF;
+                });
+                $rootScope.MainUserBind.convManager.status="outgoing call";
                 $rootScope.peerUser.$loaded().then(function(){
-                      if($rootScope.peerUser.convManager.status=="idle"){
+                      if($rootScope.peerUser.convManager.status=="idle"||$rootScope.peerUser.convManager.status=="ended"){
                           $rootScope.binds.peerConvManager.$ref().child('peerCaller').set($rootScope.MainUser,function(error){
                           console.log(error);
                           });
                           
-                          CampaignsService.getRandomCampaignId().then(function(cid){
+                          CampaignsService.getCampaignIdByUserId($rootScope.MainUserBind.uid).then(function(cid){
                              $rootScope.binds.peerConvManager.$ref().child('currentCampaignId').set(cid,function(error){
                               console.log(error);
                               });
+                             var campaignRef = new Firebase("https://mtdemo.firebaseio.com/campaigns/"+cid);
+                                 campaignRef.once("value",function(snapshot){
+                                  $rootScope.binds.peerConvManager.$ref().child('currentCampaign').set(snapshot.val(),function(error){
+                                  console.log(error);
+                                 })
+                             })
+                              
+                             
+                             
                               $rootScope.binds.peerConvManager.$ref().child('status').set("connecting",function(error){
                               console.log(error);
                               });
+
+
+                              $rootScope.peerUser.$loaded(function(data){
+
+                                  $rootScope.binds.peerConvManager.$loaded(function(data){
+                                         $rootScope.$broadcast('outgoingCall',peer_uid);
+                                         d.resolve();
+                                   });
+                                  
+                                });
                            });
                          
-                          $rootScope.binds.peerConvManager.$loaded(function(data){
-
-                          });
-                          $rootScope.peerUser.$loaded(function(data){
-                            $rootScope.$broadcast('outgoingCall',peer_uid);
-                          });
+                          
+                          
                       }
                       else{
                         alert("line is busy");
+                        d.reject("line is busy");
                       }
 
                 })
@@ -276,7 +314,7 @@ angular.module("dal.service",[])
                 
                 
               })
-
+         return d.promise;
               }  
         var getStatus=function(){
            if($rootScope.callType=="incoming")
@@ -302,12 +340,17 @@ angular.module("dal.service",[])
             if($rootScope.binds.peerConvManager)
                 {
                 $rootScope.binds.peerConvManager.$ref().child("status").set("ended",function(error){
+                  $rootScope.MainUserBind.convManager.status="idle";
                   $rootScope.binds.peerConvManager.$destroy(); 
                 })
                 
                 $rootScope.$broadcast('connection-ended');
                console.log("connection-ended fired");  
-               }        
+               }
+
+
+             if($rootScope.PeerUserBind)
+             $rootScope.unBindPeerUser();          
            }
           console.log("connection-ended not fired");
           //if($rootScope.callType=="outgoing")
@@ -336,6 +379,10 @@ angular.module("dal.service",[])
             {
               $rootScope.binds.peerConvManager.$ref().child("status").set("canceled");
               setTimeout(function() {endConnection();}, 100);
+            }
+            if(getStatus()=="idle"){
+              $rootScope.$broadcast('connection-ended');
+            console.log("connection-ended fired");
             }
           },
           endConnection:endConnection,

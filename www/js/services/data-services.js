@@ -1,5 +1,18 @@
 angular.module('data.services',[])
 
+.factory('Weather', ['$q', '$http', 
+  function($q,  $http) {
+  var url = 'https://api.forecast.io/forecast/' + '803fccd23763a6555da6b83cbc7a2a4f' + '/';
+
+
+
+  return {
+    //getAtLocation: function(lat, lng) {
+    getCurrentWeather: function(lat, lng) {
+      return $http.jsonp(url + lat + ',' + lng + '?callback=JSON_CALLBACK');
+    }
+  }
+}])
 .factory('Countries', function() {
   var countries_data = [{"name":"Afghanistan","dial_code":"+93","code":"AF"},
   {"name":"Albania","dial_code":"+355","code":"AL"},

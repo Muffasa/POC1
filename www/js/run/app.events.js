@@ -20,7 +20,7 @@ angular.module("MTPOC")
 		                        }
 		                        if(callStatus=="connecting"){
 		                        	console.log("peer user connected to this convManager, starting incoming call protocol");
-		                        	$rootScope.callType="incoming";
+		                        	$rootScope.callType="incoming";		                        	
 		                        	$state.go("app.live-connection");
 		                        	//$rootScope.$broadcast('incomingCall',$rootScope.MainUser.convManager.peerCaller);
 		                        }

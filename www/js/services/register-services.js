@@ -24,7 +24,14 @@ angular.module('register.services',[])
 
                   currentUserRef = new Firebase("https://mtdemo.firebaseio.com/users/"+uid);
                   var result = $firebaseObject(currentUserRef);
-                  $rootScope.MainUserBinding = result;
+                  result.$loaded().then(function(){
+                    $rootScope.MainUserBinding = result;
+                    //$rootScope.MainUserBind={};
+                    result.$bindTo($rootScope,"MainUserBind").then(function(){
+
+                    })
+                  })
+                  
                   //result.$loaded().then(function(data){
                     currentUserRef.on("value",function(data){
                       var currentUser = data.val();
