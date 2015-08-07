@@ -34,7 +34,7 @@ angular.module('MTPOC')
 								                  CallerId:'+97243741132', 
 								                  callFrom: $rootScope.Twilio.userPhoneNumber,				
 								                  callTo:to,
-								                  campaignId:$rootScope.PeerUserBind.convManager.currentCampaignId//$rootScope.binds.peerConvManager.currentCampaignId
+								                  campaignId:$rootScope.currentCid
 								                  });
 													      
 													d.resolve($rootScope.connection);

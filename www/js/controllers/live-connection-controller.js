@@ -89,7 +89,7 @@ angular.module("live-connection.controller",[])
               $scope.incomingCallModal.show();
               setTimeout(function() {
                 $rootScope.$broadcast('incomingCallModal.show');
-              }, 1000);
+              }, 500);
               
 
             },function(error){
@@ -101,6 +101,7 @@ angular.module("live-connection.controller",[])
             
          }
          if($rootScope.callType=="outgoing"){
+          $scope.canCancel=false;
             $scope.currentCampaign = $rootScope.binds.peerConvManager.currentCampaign;
             $scope.convManager=$rootScope.binds.peerConvManager;
             $scope.peerUser=$rootScope.peerUser;
@@ -119,16 +120,22 @@ angular.module("live-connection.controller",[])
             });
 
            
-            
+            $scope.$on("canCancel",function(){
+              $scope.canCancel=true;
+            })
 
                 $scope.abortCall = function(){
-                if(window.cordova)
-                $rootScope.TwilioClient.abort();
-                else
-                ConversationF.abort();
-               // $scope.callingModal.remove();
-                //$ionicHistory.goBack();
+                  if($scope.canCancel){
+
+
+                      if(window.cordova)
+                      $rootScope.TwilioClient.abort();
+                      else
+                      ConversationF.abort();
+                     // $scope.callingModal.remove();
+                      //$ionicHistory.goBack();
                 }
+              }
                
             
 
@@ -242,9 +249,7 @@ angular.module("live-connection.controller",[])
                         $scope.dialpadShow=false;
                   });
 
-     socket.on("answered",function(){
-      $scope.answered=true;
-     })
+
 
 
 

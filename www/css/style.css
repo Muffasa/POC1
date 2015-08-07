@@ -37,9 +37,14 @@
   }
 
 .campaignImage{
-  width: 70%;
-  margin-left: 15%;
+  width: 50%;
+  margin-left: 25%;
 
+}
+.incoming-buttons{
+  background-color: #555555 !important;
+  border-color: #555555 !important;
+  height: 100%;
 }
 .dropdown-list{
   //background-color: #555555 !important;

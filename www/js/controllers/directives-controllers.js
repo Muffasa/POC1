@@ -2,23 +2,54 @@ angular.module('MTPOC')
 
 .controller("incomingCallCtrl",function ($scope,$rootScope,$state,$http,$q,$ionicHistory,MediaSrv,socket,CampaignsService,ConversationF){
       
-
-      
-      $rootScope.$on("incomingCallModal.show",function(){
-
-          //mainInitRington();
+ 
+     var unregisterIncomingCallModal = $rootScope.$on("incomingCallModal.show",function(){
           if(!$scope.rington)
           initRington().then(function(){
             $scope.rington.play();
           });
-       // $scope.$broadcast('timer-set-countdown',$rootScope.currentCampaign.lenght);
+       
+       $scope.peerUser = $rootScope.MainUserBinding.convManager.peerCaller;
+       $scope.currentCampaign = CampaignsService.getCampaignById($rootScope.MainUserBinding.convManager.currentCampaignId);
+
+       
+       $scope.totalEarnings=0;
+       $scope.progress=0;
+
+       $scope.currentCampaign.$loaded().then(function(){
+        $scope.$broadcast('timer-set-countdown',parseFloat($scope.currentCampaign.audio.duration));
         $scope.$broadcast('timer-start');
-        $scope.myTimer = setInterval(function(){
-        
-        },1000)
+        unregisterIncomingCallModal();
+       })
+       
       });
-      $scope.$on('timer-stopped', function (event, data){
-                clearInterval($scope.myTimer);
+      var unregisterTimeTick = $scope.$on('timer-tick', function (event, data){ 
+      if(data.millis/1000<$scope.currentCampaign.audio.duration) {       
+                $scope.totalEarnings+=parseFloat($scope.currentCampaign.pps);
+                $rootScope.MainUserBind.balance+=parseFloat($scope.currentCampaign.pps);
+                $scope.progress+=100/$scope.currentCampaign.audio.duration; 
+               
+                if($scope.$root)
+                if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                    $scope.$apply();
+                }
+      }
+      else{
+        unregisterTimeTick();
+      }       
+            });
+      var unregisterTimeStop=$scope.$on('timer-stopped', function (event, data){
+
+                $scope.progress=100;
+                $scope.totalEarnings+=parseFloat($scope.currentCampaign.ppfl);
+                $rootScope.MainUserBind.balance+=parseFloat($scope.currentCampaign.ppfl);
+                $scope.balanceUpdated="Founds Added To Your Balance!";
+                if($scope.$root)
+                if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                    $scope.$apply();
+                }
+                unregisterTimeStop();
+                unregisterTimeTick();
                // $scope.currentCampaign = CampaignsService.getCampaignById($rootScope.MainUserBinding.convManager.currentCampaignId);
               //  $scope.$broadcast('timer-start');
                // $scope.myTimer = setInterval(function(){
@@ -27,13 +58,6 @@ angular.module('MTPOC')
 
             });
 
-
-
-      $scope.peerUser = $rootScope.MainUserBinding.convManager.peerCaller;
-      $scope.currentCampaign =  CampaignsService.getCampaignById($rootScope.MainUserBinding.convManager.currentCampaignId);//$rootScope.MainUserBinding.convManager.currentCampaign;
-      //campaign.$loaded(function(data){
-      //  $scope.currentCampaign = data;
-    // })
 
       var initRington = function(){
         var d =$q.defer();
@@ -99,11 +123,18 @@ angular.module('MTPOC')
       $scope.messege = function(){
         //new modal  with templat es messeges and text box
       };
+      $scope.$on("incomingCallModal.removed",function(){
+                unregisterTimeStop();
+                unregisterTimeTick();
+                $scope.rington.pause();
+         $scope.rington.reset();
+      })
       $scope.$on('$destroy',function(){
         unRegisterEnded();
         $scope.rington.pause();
         $scope.rington.reset();
         $scope.incomingCallModal.remove();
+        
 
       })
 
@@ -112,6 +143,7 @@ angular.module('MTPOC')
          $scope.rington.pause();
          $scope.rington.reset();
          $scope.incomingCallModal.remove();
+         
 
       });
 

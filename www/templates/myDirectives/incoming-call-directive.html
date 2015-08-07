@@ -15,31 +15,36 @@
             </div>
            
         </div>
-
+ 
        <!-- <div class="item">
           <h3  class="text">Your Banner Is Active!</h3>
           <h4  class="text">Corrent Campaign:</h4>
         </div>-->
-
+  
 
         <div class="item item-image">
                     <h2 class="text">{{currentCampaign.name}}</h2>
-                    <img ng-if="currentCampaign.image" class="campaignImage"  ng-src="{{currentCampaign.image.src}}" style="max-width:100% !important; max-height: 20% !important;">
-                    <img ng-if="!currentCampaign.image"  ng-src="img/icon.png" style="max-width:100% !important; max-height: 20% !important;">
+                    <img ng-if="currentCampaign.image" class="campaignImage"  ng-src="{{currentCampaign.image.src}}" >
+                    <img ng-if="!currentCampaign.image" class="campaignImage"  ng-src="img/icon.png" >
         </div>
 
         <div class="item">
-          <timer id="timer" countdown="{{currentCampaign.audio.duration}}" interval="1000" autostart="false">
-            <div class="progress progress-striped active {{displayProgressActive}}"> 
-              <div class="text">ppfl:{{currentCampaign.ppfl}} pps:{{currentCampaign.pps }} </div>
-                 <div class="text">{{progressBar}}% to full payment:{{currentCampaign.ppfl}} </div>
-                 <progress max="100" value="{{progressBar}}"></progress>
-                 <div class="text">Current call earnings: pps:{{currentCampaign.pps }} duration:{{currentCampaign.audio.duration}} {{(currentCampaign.audio.duration)}}<!-- * parseFloat((parseFloat(currentCampaign.audio.duration) - parseFloat(millis/1000))}} --></div>
-            </div>
+          
+          <timer id="timer"  interval="1000"  autostart="false">
+            <div class="text">{{progress | number:1}}% to full payment:{{currentCampaign.ppfl | currency}} </div>
+                                       <progress max="100" value="{{progress}}"></progress>           
+
+
+              <div class="text">Currents call earnings: {{totalEarnings | currency}}</div>  
           </timer>
+                 
+            <div class="text">{{balanceUpdated}}</div>
         </div>
 
-              <div class="item tabs tabs-secondary text " >
+</div>
+
+<div class="bar bar-footer ">
+              <div class="text tabs  incoming-buttons " >
                <a class="tab-item balanced" ng-click="answer()">
                       <i class="icon ion-android-call"></i>
                 </a>
@@ -51,9 +56,7 @@
                   
                 </a>
               </div>
-</div>
-
-
+            </div> 
    </ion-content>
 
 

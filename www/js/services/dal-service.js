@@ -216,6 +216,7 @@ angular.module("dal.service",[])
             var d = $q.defer();
             
             var convM = {
+                ownerId:$rootScope.MainUser.uid,
                 status:'idle',//idle connecting canceld ongoing ended
                 peerCaller:"",
                 currentCampaign:""
@@ -258,22 +259,36 @@ angular.module("dal.service",[])
             };
        var bindPeerConvM=function (peer_phone_number){
         var d =$q.defer();
+        if(peer_phone_number===$rootScope.MainUserBind.phone_number)
+                                    {
+                                      alert("you cant call yourself");
+                                      d.reject();
+                                    }
+        else{
+
+
+
               UsersService.getUidByPhoneNumber(peer_phone_number).then(function(peer_uid){
                 var peerConvMRef = new Firebase("https://mtdemo.firebaseio.com/users/"+peer_uid+"/convManager");
                 var peerRef = new Firebase("https://mtdemo.firebaseio.com/users/"+peer_uid);
                 $rootScope.binds.peerConvManager=$firebaseArray(peerConvMRef);
                 $rootScope.peerUser = $firebaseObject(peerRef);
-                $rootScope.peerUser.$bindTo($rootScope,"PeerUserBind").then(function(unbindF){
-                  $rootScope.unBindPeerUser = unbindF;
-                });
+                //$rootScope.peerUser.$bindTo($rootScope,"PeerUserBind").then(function(unbindF){
+                 // $rootScope.unBindPeerUser = unbindF;
+                //});
                 $rootScope.MainUserBind.convManager.status="outgoing call";
                 $rootScope.peerUser.$loaded().then(function(){
                       if($rootScope.peerUser.convManager.status=="idle"||$rootScope.peerUser.convManager.status=="ended"){
+
                           $rootScope.binds.peerConvManager.$ref().child('peerCaller').set($rootScope.MainUser,function(error){
                           console.log(error);
                           });
                           
                           CampaignsService.getCampaignIdByUserId($rootScope.MainUserBind.uid).then(function(cid){
+
+
+$rootScope.currentCid = cid;///goal nefesh workaround for stable
+
                              $rootScope.binds.peerConvManager.$ref().child('currentCampaignId').set(cid,function(error){
                               console.log(error);
                               });
@@ -283,22 +298,24 @@ angular.module("dal.service",[])
                                   console.log(error);
                                  })
                              })
-                              
-                             
-                             
-                              $rootScope.binds.peerConvManager.$ref().child('status').set("connecting",function(error){
-                              console.log(error);
-                              });
-
-
-                              $rootScope.peerUser.$loaded(function(data){
-
-                                  $rootScope.binds.peerConvManager.$loaded(function(data){
+                              $rootScope.binds.peerConvManager.$loaded(function(data){
                                          $rootScope.$broadcast('outgoingCall',peer_uid);
                                          d.resolve();
                                    });
+                             
+                             $timeout(function() {
+                              $rootScope.binds.peerConvManager.$ref().child('status').set("connecting",function(error){
+                              console.log(error);
+                              $rootScope.$broadcast('canCancel');
+                              })
+                            }, 3000);
+                              
+
+
+                            
                                   
-                                });
+                                  
+                                
                            });
                          
                           
@@ -314,6 +331,7 @@ angular.module("dal.service",[])
                 
                 
               })
+          }
          return d.promise;
               }  
         var getStatus=function(){
@@ -340,7 +358,7 @@ angular.module("dal.service",[])
             if($rootScope.binds.peerConvManager)
                 {
                 $rootScope.binds.peerConvManager.$ref().child("status").set("ended",function(error){
-                  $rootScope.MainUserBind.convManager.status="idle";
+                  
                   $rootScope.binds.peerConvManager.$destroy(); 
                 })
                 
@@ -349,9 +367,11 @@ angular.module("dal.service",[])
                }
 
 
-             if($rootScope.PeerUserBind)
-             $rootScope.unBindPeerUser();          
+             //if($rootScope.PeerUserBind)
+             //$rootScope.unBindPeerUser();          
            }
+           $timeout(function() {$rootScope.MainUserBind.convManager.status="idle";}, 1000);
+           
           console.log("connection-ended not fired");
           //if($rootScope.callType=="outgoing")
            // if(getStatus()!="idle"&&getStatus!="ended")

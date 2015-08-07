@@ -26,22 +26,28 @@
                 <span class="item-note">
                   {{MainUserBinding.phone_number}}
                 </span>
+                
               </a>
               <a ng-if="MainUserBinding.isFull" class="item item-avatar item-icon-right" menu-close ui-sref="app.profile"> 
                     <img ng-src="{{MainUserBinding.profileImageURL}}">
                     <h2 class="dark">{{MainUserBinding.displayName}}</h2>
-                    </div>
-                    
-                     </a>
+              </a>
 
+              <a class="item item-icon-left" menu-close ui-sref="app.wallet-connect">
+                <i class="icon ion-cash dark"></i>
+                <div class="dark">Balance:</div>
+                <span class="badge badge-balanced">{{MainUserBind.balance | currency}}</span>
 
+              </a>
 
+              
 
               <a class="item item-icon-left calm-900 " menu-close ui-sref="app.wallet-connect">
                 <i class="icon ion-card"></i>
                 <div class="dark">Conect To Wallet</div>
+
               </a>
-              <a class="item item-button-right item-icon-left " ng-disabled="MainUserBinding.isFull" menu-close ui-sref="app.sing-up">
+              <a class="item item-button-right item-icon-left " ng-if="!MainUserBinding.isFull" ng-disabled="MainUserBinding.isFull" menu-close ui-sref="app.sing-up">
                 <i class="icon ion-log-in balanced "></i>
                 <div class="dark">Sing-up</div> 
                 <button class="button button-positive " ng-click="socialLogin('facebook')">

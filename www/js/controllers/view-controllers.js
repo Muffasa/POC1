@@ -199,6 +199,7 @@ angular.module('view.controllers', [])
     
 })
 .controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion,CampaignsService) {
+
   $scope.allCampaigns = CampaignsService.getAllCampaigns();
   $scope.allCampaigns.$watch(function(event){
     if($scope.allowMotion)

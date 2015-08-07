@@ -186,7 +186,9 @@ angular.module('MTPOC', ['ionic','ionic-material','ngCordova','ngAudio','ionic.s
             'menuContent': {
                 templateUrl: 'templates/profile.html',
                 controller: 'ProfileCtrl'
-            }/*,
+            },
+            'fabContent':''
+            /*,
             'fabContent': {
                 template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
                 controller: function ($timeout) {
@@ -217,7 +219,8 @@ angular.module('MTPOC', ['ionic','ionic-material','ngCordova','ngAudio','ionic.s
         controller: 'LiveConnectionCtrl'
       },
       'fabContent': ''
-    }
+    },
+    cantNavigate:true
   })
 
    .state('loading', {

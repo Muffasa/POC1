@@ -180,6 +180,7 @@ angular.module('init.controllers', [])
 
   var d = $q.defer();
         TokensGenerator.createPhoneValidatedUser({
+        balance: 0,
         phone_number: $stateParams.userPhoneNumber,
         country: Countries.getByDialCode($stateParams.userPhoneNumber.slice(0,$stateParams.userPhoneNumber.indexOf('-'))),
         device_uuid:$scope.deviceUUID,        
