@@ -241,7 +241,7 @@ angular.module('register.services',[])
             	getTwilioToken:function (user_phone_number){
         			  var d = $q.defer();
 
-        			   $http.get('http://188.226.198.99:3000/twilioTokenGen/'+user_phone_number)
+        			   $http.get('http://188.226.198.99:3333/twilioTokenGen/'+user_phone_number)
         			             .success(function(twilioToken){
         			                d.resolve(twilioToken);
         			              },function(error){
@@ -253,7 +253,7 @@ angular.module('register.services',[])
                 getFirebaseAuthToken: function (uid){
         				  var d = $q.defer();
 
-        				   $http.get('http://188.226.198.99:3000/createFirebaseToken/'+uid)
+        				   $http.get('http://188.226.198.99:3333/createFirebaseToken/'+uid)
         				             .success(function(firebaseAuthToken){
         				                d.resolve(firebaseAuthToken);
         				              },function(error){
@@ -303,7 +303,13 @@ angular.module('register.services',[])
                  },
                 createPhoneValidatedUser:function(user){
         				  var d = $q.defer();
-        				  var usersRef= new Firebase("https://mtdemo.firebaseio.com/users");
+                  $http.post('http://188.226.198.99:3333/CreateUser/',{newUser:user}).then(function(uid){
+                    d.resolve(uid.data);
+                  },function(error){
+                    d.reject(error);
+                  })
+                  
+        				 /* var usersRef= new Firebase("https://mtdemo.firebaseio.com/users");
 
         				 var userID =  usersRef.push().key();
 
@@ -316,13 +322,13 @@ angular.module('register.services',[])
         				 }
         				 else{
         				  d.reject();
-        				 }
+        				 }*/
 
          				return d.promise;
         		 },
              getUidByPhoneNumber: function(phone_number){
               var d = $q.defer();
-                         $http.get('http://188.226.198.99:3000/getUidByPhoneNumber/'+phone_number)
+                         $http.get('http://188.226.198.99:3333/getUidByPhoneNumber/'+phone_number)
                      .success(function(uid){
                         d.resolve(uid);
                       },function(error){
@@ -336,7 +342,7 @@ angular.module('register.services',[])
                                 user_phone_number:phone_number,
                                 data_to_add:socialData
                               };
-                         $http.post('http://188.226.198.99:3000/mergeFullUser/',data)
+                         $http.post('http://188.226.198.99:3333/mergeFullUser/',data)
                      .success(function(fullUser){
                         d.resolve(fullUser);
                       },function(error){
