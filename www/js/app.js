@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('MTPOC', ['ionic','ionic-material','ngCordova','ngAudio','ionic.service.push','ionic.service.core','firebase','btford.socket-io','MTPOC.controllers','MTPOC.services','timer'])
+angular.module('MTPOC', ['ionic','ionic-material','ngCordova','ngAudio','ngMap','ionic.service.push','ionic.service.core','firebase','btford.socket-io','MTPOC.controllers','MTPOC.services','timer'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -179,7 +179,39 @@ angular.module('MTPOC', ['ionic','ionic-material','ngCordova','ngAudio','ionic.s
     })
 
 
-
+    .state('app.settings', {
+        url: '/settings',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/settings.html',
+                controller: 'SettingsCtrl'
+            },
+            'fabContent': ''
+            }
+        
+    })
+    .state('app.map', {
+        url: '/settings/map',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/settings/settings-map.html',
+                controller: 'MapCtrl'
+            },
+            'fabContent': ''
+            }
+        
+    })
+    .state('app.fixed-users', {
+        url: '/settings/fixed-users',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/settings/settings-fixed-users.html',
+                controller: 'FixedUsersCtrl'
+            },
+            'fabContent': ''
+            }
+        
+    })
     .state('app.profile', {
         url: '/profile',
         views: {

@@ -1,0 +1,26 @@
+ <ion-view view-title="GeoMap" >
+
+
+<ion-content class="map-view" data-tap-disabled="true">
+	<div class="text">Your current Position:
+	<div class="text">lat:{{MainUserBind.location.lat}}</div>
+	<div class="text">lon:{{MainUserBind.location.lon}}</div>
+</div>
+
+		<div class="button-bar">
+		  <a ng-click="getGPSLocation()" class="button button-calm">GPS</a>
+		  <a ng-click="setFixedLocation()" class="button button-balanced">Set Fix Location</a>
+		</div>	   
+<div class="map" map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyCya_IFLfR8QMehGOnKNLFqyB7H7m_Sv04&sensor=false">
+  <map  ></map>
+</div>
+	<div class="text">Map Position:
+		<div class="text">lat:{{lat}}</div>
+		<div class="text">lon:{{lon}}</div>
+    </div>
+</ion-content>
+    <ion-footer-bar class="bar button-bar bar-dark">
+      <!--<a ng-click="centerOnMe()" class="button button-icon icon ion-navigate">Find Me</a>-->
+    </ion-footer-bar>
+
+ </ion-view>

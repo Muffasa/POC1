@@ -1,0 +1,19 @@
+  
+ <ion-modal-view class="map-modal-location"  ng-controller="MapController" >
+<ion-content >
+<div class="text">Your current Position:
+	<div class="text">lat:{{MainUserBind.location.lat}}</div>
+	<div class="text">lon:{{MainUserBind.location.lon}}</div>
+</div>
+
+		<div class="button-bar">
+		  <a ng-click="getGPSLocation()" class="button button-calm">GPS</a>
+		  <a ng-click="setFixedLocation()" class="button button-balanced">Set Fix Location</a>
+		</div>
+
+		    <div id="map" data-tap-disabled="true"></div>
+
+</ion-content>
+
+
+ </ion-modal-view>

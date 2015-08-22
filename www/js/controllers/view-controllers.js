@@ -234,8 +234,8 @@ angular.module('view.controllers', [])
     $scope.$on('$ionicView.beforeEnter', function() {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-    $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab('left');
 
     $scope.$on('ngRepeatFinished', function() {
@@ -328,7 +328,53 @@ $scope.$on('$ionicView.beforeEnter', function() {
     } 
 
 })
+.controller("SettingsCtrl",function($scope,$rootScope,$state,$timeout, ionicMaterialMotion, ionicMaterialInk,$ionicModal) {
+  $scope.$on('$ionicView.beforeEnter', function() {
+    $scope.$parent.showHeader();
+    $scope.$parent.myClearFabs();
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
 
+
+  });
+
+
+      $scope.showMap = function(){
+         $state.go("app.map");
+      }
+      $scope.fixedUsers = function(){
+         $state.go("app.fixed-users");
+      }  
+      $scope.showLanguageForm = function(){
+         $ionicModal.fromTemplateUrl('templates/modals/change-language-modal.html', {
+              scope: $scope,
+              animation: 'slide-in-up',
+              backdropClickToClose: true,
+              hardwareBackButtonClose: true
+            }).then(function(modal) {
+              $scope.LModal = modal;
+              $scope.LModal.show();
+            },function(error){
+              console.log(error);
+            });
+      }  
+         $scope.changeLanguage = function(language){
+          $rootScope.MainUserBind.language = language;
+         }
+         $scope.langs = [
+          { text: "Hebrew", value: "Hebrew" },
+          { text: "English", value: "English" },
+          { text: "Russian", value: "Russian" },
+          { text: "Arab", value: "Arab" }
+        ];
+
+ 
+
+
+
+
+})
 .controller('ActivityCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
   $scope.$on('$ionicView.enter', function() {
     $scope.$parent.showHeader();

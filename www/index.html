@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <!--<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">-->
-
+<meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
 
 
     <title></title>
@@ -30,6 +30,9 @@
             <script src="lib/humanize-duration/humanize-duration.js"></script>
             <!--Angular Audio/ngAudio-->
             <script src="lib/angular-audio/app/angular.audio.js"></script>
+            <!--google maps-->
+            
+            <script src="http://rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.js"></script>
 
     <!--Firebase-->
     <script src="lib/firebase/firebase.js"></script>
@@ -60,9 +63,10 @@
     <script src="js/config/root-directives-config.js"></script>
     <script src="js/run/app.run.js"></script>
     <script src="js/run/app.events.js"></script>
-    
+
     <script src="js/controllers/live-connection-controller.js"></script>
     <script src="js/controllers/initialize-controllers.js"></script>
+    <script src="js/controllers/settings-controllers.js"></script>
     <script src="js/controllers/view-controllers.js"></script>
     <script src="js/controllers/directives-controllers.js"></script>
     <script src="js/services/campaing-injector-service.js"></script>
@@ -80,8 +84,14 @@
     <script src="js/directives/user-options-directive.js"></script>
     <script src="js/filters/filters.js"></script>
     
+
+
+
+
   </head>
   <body ng-app="MTPOC">
     <ion-nav-view></ion-nav-view>
+       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCya_IFLfR8QMehGOnKNLFqyB7H7m_Sv04&sensor=false"></script>
   </body>
+
 </html>

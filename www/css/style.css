@@ -1,4 +1,51 @@
 /* Empty. Add your own CSS if you like */
+/*.scroll {
+    height: 100%;
+}
+ 
+#map {
+    width: 100%;
+    height: 80%;
+    margin-top:0;
+    //margin-left: 10%;
+}*/
+
+  .map-modal-location {
+  background-color: #666666;  
+     width: 90%; 
+     height: 80% ; 
+     top: 15%; 
+     left: 5%; 
+     
+     min-height: 0px !important;
+     
+  }
+  .user-option-modal-location {  
+     width: 70%; 
+     height: 30% ; 
+     top: 30%; 
+     left: 15%; 
+     
+     min-height: 0px !important;
+     
+  }
+  .change-language-modal-location{
+     width: 70%; 
+     height: 40% ; 
+     top: 30%; 
+     left: 15%; 
+     
+     min-height: 0px !important;
+  }
+    .dialpad-modal {  
+     width: 100%; 
+     height: 50% ; 
+     top: 40%; 
+
+     
+     min-height: 0px !important;
+     
+  }
 .Aligner {
   display: flex !important;
   align-items: center !important;
@@ -16,37 +63,26 @@
 .Aligner-item--bottom {
   align-self: flex-end !important;
 }
-
-  .user-option-modal-location {  
-     width: 70%; 
-     height: 30% ; 
-     top: 30%; 
-     left: 15%; 
-     
-     min-height: 0px !important;
-     
-  }
-    .dialpad-modal {  
-     width: 100%; 
-     height: 50% ; 
-     top: 40%; 
-
-     
-     min-height: 0px !important;
-     
-  }
-
 .campaignImage{
   width: 50%;
   margin-left: 25%;
 
 }
-.incoming-buttons{
+
+
+.map-view{
+  background-color: #555555 !important;
+}
+.map > div{
+  height: 100% ;
+  width: :400px !important;
+}
+.incoming-buttons{ 
   background-color: #555555 !important;
   border-color: #555555 !important;
   height: 100%;
 }
-.dropdown-list{
+.dropdown-list{ 
   //background-color: #555555 !important;
   width: auto !important;
   max-width: 80%;

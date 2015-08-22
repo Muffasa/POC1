@@ -183,6 +183,7 @@ angular.module('init.controllers', [])
         balance: 0,
         phone_number: $stateParams.userPhoneNumber,
         country: Countries.getByDialCode($stateParams.userPhoneNumber.slice(0,$stateParams.userPhoneNumber.indexOf('-'))),
+        language:"Hebrew",
         device_uuid:$scope.deviceUUID,        
         ionic_push_token: $scope.ionicPushToken//update commonly
         

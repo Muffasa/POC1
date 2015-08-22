@@ -1,0 +1,17 @@
+<ion-modal-view class="change-language-modal-location ">
+
+ <div class="list">
+        
+        <div class="item item-divider"> 
+          Current User Language: {{ MainUserBind.language }}
+        </div>
+        
+        <ion-radio ng-repeat="lang in langs"
+                   ng-value="lang.value"
+                   ng-model="MainUserBind.language">
+          {{ lang.text }}
+        </ion-radio>
+        
+      </div>
+
+  </ion-modal-view>

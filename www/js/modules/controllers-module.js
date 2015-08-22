@@ -1,1 +1,1 @@
-angular.module("MTPOC.controllers",["view.controllers","init.controllers","live-connection.controller"])//,"directives.controllers"])
+angular.module("MTPOC.controllers",["view.controllers","init.controllers","live-connection.controller","settings.controllers"])//,"directives.controllers"])
